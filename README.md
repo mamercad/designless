@@ -179,3 +179,7 @@ make lint              # Validate JSON, YAML, Markdown
 ## License
 
 MIT. See [LICENSE.txt](LICENSE.txt).
+
+---
+
+If Designless is useful to you, you can [buy me a coffee](https://buymeacoffee.com/mamercad).
