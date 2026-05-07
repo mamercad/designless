@@ -164,7 +164,7 @@ Each includes palette values, semantic token colors, and terminal ANSI color set
 
 ## Source & Philosophy
 
-The palette and design philosophy come from the 2ndBrain wiki: [`wiki/designless.md`](https://github.com/mamercad/2ndBrain/blob/main/wiki/designless.md).
+The palette and design philosophy are documented in this repository in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## Contributing
 
