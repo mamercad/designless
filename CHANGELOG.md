@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Slack** sidebar themes (`slack/designless-dark`, `slack/designless-light`, `slack/README.md`); documented as a Designless target alongside Makefile-installed themes
+- `.gitignore` rule for `.DS_Store` (macOS folder metadata)
 - Makefile for automated theme installation, backup, and restoration
 - XDG_CONFIG_HOME support with fallback to `~/.config`
 - `make env-light` and `make env-dark` targets for shell environment exports

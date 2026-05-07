@@ -124,7 +124,7 @@ make lint           # Run all linting checks
 
 ### Color Consistency
 
-All themes must use colors from `colors/designless-light.json` or `colors/designless-dark.json`. Do not introduce new colors outside the shared palette without updating both JSON files and documenting the change.
+All themes must use colors from `colors/designless-light.json` or `colors/designless-dark.json`. Do not introduce new colors outside the shared palette without updating both JSON files and documenting the change. When palette values change, update **slack/** theme strings and [slack/README.md](slack/README.md) if any mapped slot uses those keys.
 
 ## Pull Request Process
 

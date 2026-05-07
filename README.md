@@ -5,7 +5,7 @@
 
 # Designless Theme
 
-Designless is a warm-monochrome design system for building cohesive themes across multiple platforms: VS Code, terminal emulators (Ghostty, iTerm, Kitty), editors (Vim, Neovim), and more.
+Designless is a warm-monochrome design system for building cohesive themes across multiple platforms: VS Code, terminal emulators (Ghostty, iTerm, Kitty), editors (Vim, Neovim), Slack sidebar themes, and more.
 
 ## Design Principles
 
@@ -34,6 +34,8 @@ Designless is a warm-monochrome design system for building cohesive themes acros
 | **Editors** | | |
 | Neovim | ✅ Complete | [neovim/](neovim/) |
 | Vim | ✅ Complete | [vim/](vim/) |
+| **Apps** | | |
+| Slack | ✅ Complete | [slack/](slack/) (manual paste; not deployed by `make install`) |
 
 ## Terminal Screenshots
 
@@ -93,6 +95,8 @@ eval "$(make env-dark)"
 #### Deployment Map
 
 The `install` target copies **24 files** across 12 tools to canonical config locations.
+Slack sidebar themes live under [slack/](slack/) and are applied by pasting the comma-separated strings into Slack ([slack/README.md](slack/README.md)); they are not copied by `make install`.
+
 In the table below, `~/.config` means `XDG_CONFIG_HOME` when set, otherwise `~/.config`.
 
 | # | Source | Destination |
@@ -143,6 +147,7 @@ Backups are stored in `backups/YYYYMMDD-HHMMSS/` and are git-ignored.
 | **fzf** | `~/.zshrc` or `~/.bashrc` → `source ~/.config/fzf/designless-dark` |
 | **Neovim** | `~/.config/nvim/init.lua` → `vim.cmd.colorscheme("designless-dark")` |
 | **Vim** | `~/.vimrc` → `colorscheme designless-dark` |
+| **Slack** | See [slack/README.md](slack/README.md): **Preferences → Appearance → Custom theme**, paste `slack/designless-dark` or `slack/designless-light` |
 
 ### Adding a New Target
 

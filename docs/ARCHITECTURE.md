@@ -41,6 +41,10 @@ designless/
 ├── vim/                       # Vim color scheme
 │   ├── colors/
 │   └── README.md
+├── slack/                     # Slack sidebar theme strings (manual paste in app)
+│   ├── designless-dark
+│   ├── designless-light
+│   └── README.md
 ├── Makefile                   # Installation automation
 ├── docs/
 │   ├── ARCHITECTURE.md        # This file
@@ -51,7 +55,7 @@ designless/
 
 ## Adding a New Target (Future)
 
-All 13 primary targets are complete. This section documents the process for adding new targets in the future.
+All Makefile-managed targets (24 theme files across 12 tools) are complete, plus **Slack** sidebar themes under `slack/` (applied manually; not run by `make install`). This section documents the process for adding new targets in the future.
 
 ### 1. Create Target Directory
 
@@ -139,7 +143,7 @@ Each target should have a `README.md` explaining:
 When updating the shared color palettes in `colors/designless-light.json` or `colors/designless-dark.json`:
 
 1. Update the color value in the shared JSON file.
-2. Regenerate or update all target files (vscode, terminal, neovim, etc.) to use the new value.
+2. Regenerate or update all target files (vscode, terminal, neovim, **slack/** comma-separated strings, etc.) to use the new value.
 3. Test visually across all targets.
 4. Commit all changes together to keep the system in sync.
 

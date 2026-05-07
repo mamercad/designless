@@ -9,7 +9,10 @@ Complete inventory of all Designless theme implementations and their status.
 | VS Code & Editors | 3 | 3 complete |
 | Terminal Emulators | 5 | 5 complete |
 | TUI Tools | 5 | 5 complete |
-| **Total** | **13** | **13 complete** |
+| Apps | 1 | 1 complete |
+| **Total** | **14** | **14 complete** |
+
+The Makefile installs terminal, TUI, and editor artifacts only (**24 files**, **12 tools**). **Slack** is documented and versioned under `slack/` but applied manually in the Slack desktop app (paste theme string).
 
 ---
 
@@ -22,6 +25,12 @@ Complete inventory of all Designless theme implementations and their status.
 | **VS Code** | `designless-light-color-theme.json`, `designless-dark-color-theme.json` | Packaged as `.vsix` |
 | **Neovim** | `colors/designless-light.lua`, `colors/designless-dark.lua` | Standalone Lua colorschemes |
 | **Vim** | `colors/designless-light.vim`, `colors/designless-dark.vim` | Vimscript colorscheme |
+
+### Apps
+
+| Target | Files | Notes |
+|--------|-------|-------|
+| **Slack** | `designless-dark`, `designless-light` | Sidebar **Custom theme** (10 hex values per variant); see [slack/README.md](../slack/README.md); not deployed by `make install` |
 
 ### Terminal Emulators
 
@@ -62,7 +71,7 @@ All targets reference shared color definitions in `colors/`:
 - `designless-light.json` — palette, semanticTokens, terminal ANSI colors for light mode
 - `designless-dark.json` — palette, semanticTokens, terminal ANSI colors for dark mode
 
-When the shared palette changes, all targets must be updated to stay in sync.
+When the shared palette changes, all targets must be updated to stay in sync (including comma-separated strings in `slack/`).
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the full design guide.
 

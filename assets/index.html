@@ -506,6 +506,93 @@ html.light .wp-tile { border-color: rgba(0,0,0,.08); }
 }
 .wp-swatch:hover .wp-dl { opacity: 1; }
 
+/* ── Slack ───────────────────────────────────────────────────────── */
+#slack { padding: 100px 0; }
+#slack h2 {
+  font-size: clamp(28px, 3.5vw, 42px); font-weight: 800;
+  letter-spacing: -.025em; color: var(--fg); margin-bottom: 12px;
+}
+#slack > .wrap > p {
+  font-size: 15px; color: var(--mute); margin-bottom: 56px; font-weight: 300;
+}
+.slack-pair {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+}
+.slack-card {
+  border: 1px solid var(--bord);
+  border-radius: 14px; overflow: hidden;
+}
+.slack-sidebar {
+  display: flex; height: 240px;
+}
+.slack-topnav {
+  position: absolute; left: 0; right: 0; top: 0; height: 44px;
+}
+.slack-col {
+  width: 220px; flex-shrink: 0; position: relative;
+  display: flex; flex-direction: column;
+}
+.slack-col-inner { padding: 8px 0; flex: 1; }
+.slack-workspace {
+  height: 44px; display: flex; align-items: center;
+  padding: 0 16px; font-size: 14px; font-weight: 600;
+  font-family: "DM Sans", sans-serif; letter-spacing: -.01em;
+  flex-shrink: 0;
+}
+.slack-item {
+  height: 30px; display: flex; align-items: center;
+  padding: 0 16px; font-size: 13px; font-family: "DM Sans", sans-serif;
+  gap: 8px; border-radius: 6px; margin: 1px 8px;
+}
+.slack-item.active { font-weight: 600; }
+.slack-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.slack-badge {
+  margin-left: auto; font-size: 11px; font-weight: 700;
+  padding: 1px 6px; border-radius: 10px; font-family: "DM Mono", monospace;
+}
+.slack-main {
+  flex: 1; border-left: 1px solid rgba(255,255,255,.06);
+  background: repeating-linear-gradient(
+    transparent, transparent 19px,
+    rgba(255,255,255,.03) 19px, rgba(255,255,255,.03) 20px
+  );
+}
+html.light .slack-main { border-left-color: rgba(0,0,0,.06); }
+.slack-swatches {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--bord);
+}
+.slack-swatch {
+  padding: 14px 16px;
+  border-right: 1px solid var(--bord);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.slack-swatch:last-child { border-right: none; }
+.slack-chip { height: 28px; border-radius: 6px; }
+.slack-swatch-label {
+  font-size: 10px; color: var(--mute);
+  font-family: "DM Mono", monospace; letter-spacing: .02em;
+}
+.slack-swatch-hex {
+  font-size: 10px; color: var(--fg);
+  font-family: "DM Mono", monospace;
+}
+.slack-footer {
+  border-top: 1px solid var(--bord);
+  padding: 14px 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.slack-label {
+  font-size: 11px; color: var(--mute); font-family: "DM Mono", monospace;
+  letter-spacing: .06em; text-transform: uppercase; flex-shrink: 0;
+}
+.slack-string {
+  font-family: "DM Mono", monospace; font-size: 11px; color: var(--fg);
+  background: var(--raise); padding: 6px 10px; border-radius: 6px;
+  border: 1px solid var(--bord); flex: 1; overflow-x: auto;
+  white-space: nowrap; scrollbar-width: none;
+}
+
 /* ── Coverage ──────────────────────────────────────────────────── */
 #coverage {
   padding: 100px 0;

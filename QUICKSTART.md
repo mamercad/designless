@@ -2,7 +2,7 @@
 
 ## What You Get
 
-All 13 themeable tools in your terminal workstation, covered in both light and dark variants:
+**Makefile-deployed targets**: 12 tools (24 theme files). **Slack** is a separate manual theme (paste strings from `slack/`). Together, **14** theme targets in light and dark variants:
 
 ### Terminal Emulators (5 targets)
 
@@ -25,6 +25,10 @@ All 13 themeable tools in your terminal workstation, covered in both light and d
 - **VS Code** — complete and packaged as `.vsix`
 - **Neovim** — complete
 - **Vim** — complete
+
+### Apps (1 target)
+
+- **Slack** — sidebar custom theme strings; see [slack/README.md](slack/README.md) (not copied by `make install`)
 
 ---
 
@@ -49,6 +53,7 @@ designless/
 ├── lazygit/                # Git UI
 ├── neovim/                 # Neovim colorscheme
 ├── vim/                    # Vim colorscheme
+├── slack/                  # Slack sidebar themes (manual paste)
 └── docs/
     ├── ARCHITECTURE.md     # Multi-target design guide
     └── TARGETS.md          # Complete inventory and status
@@ -58,7 +63,7 @@ designless/
 
 ## Installation
 
-All 13 themes are complete. See [README.md](README.md) for full installation instructions.
+See [README.md](README.md) for full installation instructions. `make install` does not modify Slack; use [slack/README.md](slack/README.md) for sidebar themes.
 
 ```bash
 cd /path/to/designless
