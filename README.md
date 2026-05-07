@@ -53,7 +53,7 @@ Sample renders of the Designless terminal variants, including ANSI 0-15 and key 
 
 ### VS Code
 
-See [vscode/README.md](vscode/README.md) for installation and development instructions.
+See [vscode/README.md](vscode/README.md) for installation and development instructions. **GitHub Releases** for tags like `v1.0.0` include a pre-built `.vsix` produced by CI ([`.github/workflows/release.yml`](.github/workflows/release.yml)).
 
 ### Installation via Make
 

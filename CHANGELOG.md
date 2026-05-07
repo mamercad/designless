@@ -7,41 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-05-07
+
+First stable release of the Designless theme system across editors, terminals, TUIs, and Slack.
+
 ### Added
 
-- **Slack** sidebar themes (`slack/designless-dark`, `slack/designless-light`, `slack/README.md`); documented as a Designless target alongside Makefile-installed themes
-- `.gitignore` rule for `.DS_Store` (macOS folder metadata)
-- Makefile for automated theme installation, backup, and restoration
-- XDG_CONFIG_HOME support with fallback to `~/.config`
-- `make env-light` and `make env-dark` targets for shell environment exports
-- Linting configuration (.markdownlintrc.json, .yamllint)
-- GitHub Actions CI workflows (lint, validate, test)
-- EditorConfig for consistent editor settings
-- CONTRIBUTING.md with Conventional Commits guidelines
+- **VS Code** extension (published `.vsix` on GitHub Releases for semver tags)
+- **Terminal emulators**: Ghostty, iTerm2, Kitty, WezTerm, Alacritty
+- **TUI tools**: tmux, delta, eza, lazygit, fzf
+- **Editors**: Neovim (Lua), Vim (Vimscript)
+- **Slack** sidebar custom themes (`slack/`)
+- Shared palettes in `colors/designless-light.json` and `colors/designless-dark.json`
+- `Makefile` install targets with backup/restore and `env-light` / `env-dark`
+- `.gitignore` for `.DS_Store`
+- Linting (Markdown, YAML, JSON), VS Code theme validation, Makefile CI
 
 ### Changed
 
-- Updated documentation to reflect all 13 themes as complete
-- Reorganized ARCHITECTURE.md to show complete project structure
+- Documentation and target inventory updated for **14** theme surfaces (Makefile-deployed targets plus manual Slack)
 
 ### Fixed
 
 - iTerm2 path handling in Makefile (paths with spaces)
-- Separator character in Makefile MAPS variable (from `|` to `%`)
+- Makefile `MAPS` delimiter (`%` instead of `|`)
 
 ## [0.0.1] - 2026-05-06
 
+Early snapshot before stable versioning.
+
 ### Added
 
-- Initial release: 13 complete Designless themes
-- **VS Code**: Dark and light color themes (packaged as .vsix)
-- **Terminal Emulators**: Ghostty, iTerm2, Kitty, WezTerm, Alacritty
-- **TUI Tools**: tmux, delta, eza, lazygit, fzf
-- **Editors**: Neovim (Lua), Vim (Vimscript)
+- Initial Designless themes across VS Code, terminals, TUIs, and editors
 - Shared color palette definitions (JSON)
-- Installation guide (README.md)
-- Architecture documentation (docs/ARCHITECTURE.md)
-- Target inventory and status (docs/TARGETS.md)
+- Installation guide (README.md), architecture docs (docs/ARCHITECTURE.md), target manifest (docs/TARGETS.md)
 
-[Unreleased]: https://github.com/mamercad/designless/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/mamercad/designless/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/mamercad/designless/releases/tag/v1.0.0
 [0.0.1]: https://github.com/mamercad/designless/releases/tag/v0.0.1

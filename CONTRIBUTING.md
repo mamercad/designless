@@ -126,6 +126,16 @@ make lint           # Run all linting checks
 
 All themes must use colors from `colors/designless-light.json` or `colors/designless-dark.json`. Do not introduce new colors outside the shared palette without updating both JSON files and documenting the change. When palette values change, update **slack/** theme strings and [slack/README.md](slack/README.md) if any mapped slot uses those keys.
 
+## Releases (maintainers)
+
+Semantic versions use **`vMAJOR.MINOR.PATCH`** tags (for example `v1.0.0`). The Git tag **without** `v` must equal **`vscode/package.json`** `version`, or [`.github/workflows/release.yml`](.github/workflows/release.yml) fails.
+
+1. Update [CHANGELOG.md](CHANGELOG.md) and bump **`vscode/package.json`** / **`vscode/package-lock.json`** if needed.
+2. Commit on `main`.
+3. Create and push the tag: `git tag -a v1.0.0 -m "Release v1.0.0"` then `git push origin v1.0.0`.
+
+CI builds `vscode/*.vsix` and attaches it to a GitHub Release for that tag.
+
 ## Pull Request Process
 
 1. Ensure all CI checks pass (lint, validate, test)

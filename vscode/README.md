@@ -13,6 +13,10 @@ From this directory:
 
 ## Installation
 
+### From GitHub Releases
+
+Each [semver tag](https://github.com/mamercad/designless/tags) matches `vscode/package.json`, triggers CI, and publishes **`designless-vscode-theme-<version>.vsix`** (for example `designless-vscode-theme-1.0.0.vsix`) on the corresponding GitHub Release. Download the `.vsix` from the release assets, then follow **From VS Code UI** below.
+
 ### From VS Code UI
 1. Open Extensions (Cmd+Shift+X)
 2. Click `...` → **Install from VSIX...**
@@ -22,7 +26,7 @@ From this directory:
 
 ### From Command Line
 ```sh
-code --install-extension designless-vscode-theme-X.X.X.vsix
+code --install-extension designless-vscode-theme-1.0.0.vsix
 ```
 
 ## Principles

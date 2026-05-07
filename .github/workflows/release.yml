@@ -1,0 +1,57 @@
+# Build the VS Code extension and publish a GitHub Release when a semver tag is pushed.
+# Tag `v1.0.0` must match `vscode/package.json` version `1.0.0`.
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify tag matches vscode/package.json version
+        run: |
+          TAG_VER="${GITHUB_REF_NAME#v}"
+          PKG_VER=$(node -p "require('./vscode/package.json').version")
+          if [ "$TAG_VER" != "$PKG_VER" ]; then
+            echo "::error title=Version mismatch::Git tag ${GITHUB_REF_NAME} implies npm version ${TAG_VER}, but vscode/package.json has ${PKG_VER}. Bump the extension version or retag."
+            exit 1
+          fi
+          echo "✓ Tag ${GITHUB_REF_NAME} matches vscode/package.json (${PKG_VER})"
+
+      - name: Sanity-check Makefile targets (same checks as CI Test workflow)
+        run: |
+          make -n install install-light install-dark env-light env-dark > /dev/null
+          make env-light | grep -q "XDG_CONFIG_HOME"
+          make env-dark | grep -q "EZA_CONFIG_DIR"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: vscode/package-lock.json
+
+      - name: Install, validate, package VSIX
+        working-directory: vscode
+        run: |
+          npm ci
+          npm run validate
+          rm -f ./*.vsix
+          npm run package
+          ls -la ./*.vsix
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: vscode/*.vsix
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
