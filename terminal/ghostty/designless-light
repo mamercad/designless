@@ -1,0 +1,28 @@
+# designless-light — Ghostty theme
+# Install: copy to ~/.config/ghostty/themes/designless-light
+# Activate: add `theme = light:designless-light,dark:designless-dark` to ~/.config/ghostty/config
+
+background            = #FFFFFF
+foreground            = #111111
+cursor-color          = #FF4719
+cursor-text           = #FFFFFF
+selection-background  = #E8E4DF
+selection-foreground  = #111111
+
+# ANSI palette
+palette = 0=#111111
+palette = 1=#C0000A
+palette = 2=#1E6B3C
+palette = 3=#7A4A00
+palette = 4=#1050A0
+palette = 5=#5A2D9A
+palette = 6=#006E6E
+palette = 7=#3A3530
+palette = 8=#555050
+palette = 9=#E8001A
+palette = 10=#2A8A50
+palette = 11=#9A5E00
+palette = 12=#1A6ACC
+palette = 13=#7A40C0
+palette = 14=#008A8A
+palette = 15=#6B6560

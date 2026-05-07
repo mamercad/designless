@@ -1,0 +1,97 @@
+# designless-light — eza theme
+# Install: copy dir to ~/.config/eza/light/ and set EZA_CONFIG_DIR=~/.config/eza/light
+
+colourful: true
+
+filekinds:
+  normal: {foreground: "#111111"}
+  directory: {foreground: "#1050A0"}
+  symlink: {foreground: "#006E6E"}
+  pipe: {foreground: "#6B6560"}
+  block_device: {foreground: "#C0000A"}
+  char_device: {foreground: "#C0000A"}
+  socket: {foreground: "#6B6560"}
+  special: {foreground: "#5A2D9A"}
+  executable: {foreground: "#1E6B3C"}
+  mount_point: {foreground: "#006E6E"}
+
+perms:
+  user_read: {foreground: "#111111"}
+  user_write: {foreground: "#7A4A00"}
+  user_execute_file: {foreground: "#1E6B3C"}
+  user_execute_other: {foreground: "#1050A0"}
+  group_read: {foreground: "#6B6560"}
+  group_write: {foreground: "#7A4A00"}
+  group_execute: {foreground: "#1050A0"}
+  other_read: {foreground: "#6B6560"}
+  other_write: {foreground: "#C0000A"}
+  other_execute: {foreground: "#C0000A"}
+  special_user_file: {foreground: "#5A2D9A"}
+  special_other: {foreground: "#6B6560"}
+  attribute: {foreground: "#6B6560"}
+
+size:
+  major: {foreground: "#6B6560"}
+  minor: {foreground: "#006E6E"}
+  number_byte: {foreground: "#111111"}
+  number_kilo: {foreground: "#6B6560"}
+  number_mega: {foreground: "#1050A0"}
+  number_giga: {foreground: "#5A2D9A"}
+  number_huge: {foreground: "#C0000A"}
+  unit_byte: {foreground: "#6B6560"}
+  unit_kilo: {foreground: "#1050A0"}
+  unit_mega: {foreground: "#5A2D9A"}
+  unit_giga: {foreground: "#C0000A"}
+  unit_huge: {foreground: "#006E6E"}
+
+users:
+  user_you: {foreground: "#111111"}
+  user_root: {foreground: "#C0000A"}
+  user_other: {foreground: "#5A2D9A"}
+  group_yours: {foreground: "#6B6560"}
+  group_other: {foreground: "#6B6560"}
+  group_root: {foreground: "#C0000A"}
+
+links:
+  normal: {foreground: "#006E6E"}
+  multi_link_file: {foreground: "#1050A0"}
+
+git:
+  new: {foreground: "#1050A0"}
+  modified: {foreground: "#7A4A00"}
+  deleted: {foreground: "#C0000A"}
+  renamed: {foreground: "#006E6E"}
+  typechange: {foreground: "#1E6B3C"}
+  ignored: {foreground: "#6B6560"}
+  conflicted: {foreground: "#C0000A"}
+
+git_repo:
+  branch_main: {foreground: "#111111"}
+  branch_other: {foreground: "#5A2D9A"}
+  git_clean: {foreground: "#1E6B3C"}
+  git_dirty: {foreground: "#C0000A"}
+
+file_type:
+  image: {foreground: "#7A4A00"}
+  video: {foreground: "#C0000A"}
+  music: {foreground: "#1050A0"}
+  lossless: {foreground: "#006E6E"}
+  crypto: {foreground: "#6B6560"}
+  document: {foreground: "#111111"}
+  compressed: {foreground: "#5A2D9A"}
+  temp: {foreground: "#C0000A"}
+  compiled: {foreground: "#1050A0"}
+  build: {foreground: "#6B6560"}
+  source: {foreground: "#006E6E"}
+
+punctuation: {foreground: "#6B6560"}
+date: {foreground: "#7A4A00"}
+inode: {foreground: "#6B6560"}
+blocks: {foreground: "#6B6560"}
+header: {foreground: "#111111"}
+octal: {foreground: "#006E6E"}
+flags: {foreground: "#5A2D9A"}
+symlink_path: {foreground: "#006E6E"}
+control_char: {foreground: "#1050A0"}
+broken_symlink: {foreground: "#C0000A"}
+broken_path_overlay: {foreground: "#6B6560"}

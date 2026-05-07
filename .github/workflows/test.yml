@@ -1,0 +1,101 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Makefile"
+      - "colors/**"
+      - "terminal/**"
+      - "tmux/**"
+      - "delta/**"
+      - "eza/**"
+      - "fzf/**"
+      - "lazygit/**"
+      - "neovim/**"
+      - "vim/**"
+      - ".github/workflows/test.yml"
+  pull_request:
+    paths:
+      - "Makefile"
+      - "colors/**"
+      - "terminal/**"
+      - "tmux/**"
+      - "delta/**"
+      - "eza/**"
+      - "fzf/**"
+      - "lazygit/**"
+      - "neovim/**"
+      - "vim/**"
+      - ".github/workflows/test.yml"
+
+jobs:
+  test-makefile:
+    runs-on: ubuntu-latest
+    name: Test Makefile targets
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test Makefile syntax (dry-run install)
+        run: |
+          make -n install > /dev/null && echo "✓ install target OK" || exit 1
+          make -n install-light > /dev/null && echo "✓ install-light target OK" || exit 1
+          make -n install-dark > /dev/null && echo "✓ install-dark target OK" || exit 1
+          make -n env-light > /dev/null && echo "✓ env-light target OK" || exit 1
+          make -n env-dark > /dev/null && echo "✓ env-dark target OK" || exit 1
+
+      - name: Test env-light output
+        run: |
+          make env-light | grep -q "XDG_CONFIG_HOME" && echo "✓ env-light contains XDG_CONFIG_HOME"
+          make env-light | grep -q "EZA_CONFIG_DIR" && echo "✓ env-light contains EZA_CONFIG_DIR"
+
+      - name: Test env-dark output
+        run: |
+          make env-dark | grep -q "XDG_CONFIG_HOME" && echo "✓ env-dark contains XDG_CONFIG_HOME"
+          make env-dark | grep -q "EZA_CONFIG_DIR" && echo "✓ env-dark contains EZA_CONFIG_DIR"
+
+      - name: Verify all source files exist
+        run: |
+          files=(
+            "colors/designless-light.json"
+            "colors/designless-dark.json"
+            "terminal/ghostty/designless-light"
+            "terminal/ghostty/designless-dark"
+            "terminal/iterm2/designless-light.json"
+            "terminal/iterm2/designless-dark.json"
+            "terminal/kitty/designless-light.conf"
+            "terminal/kitty/designless-dark.conf"
+            "terminal/alacritty/designless-light.yml"
+            "terminal/alacritty/designless-dark.yml"
+            "terminal/wezterm/designless-light.toml"
+            "terminal/wezterm/designless-dark.toml"
+            "delta/designless-light.gitconfig"
+            "delta/designless-dark.gitconfig"
+            "eza/light/theme.yml"
+            "eza/dark/theme.yml"
+            "fzf/designless-light"
+            "fzf/designless-dark"
+            "lazygit/designless-light.yml"
+            "lazygit/designless-dark.yml"
+            "tmux/designless-light.conf"
+            "tmux/designless-dark.conf"
+            "neovim/colors/designless-light.lua"
+            "neovim/colors/designless-dark.lua"
+            "vim/colors/designless-light.vim"
+            "vim/colors/designless-dark.vim"
+          )
+
+          missing=0
+          for f in "${files[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "✗ Missing: $f"
+              missing=$((missing + 1))
+            fi
+          done
+
+          if [ $missing -eq 0 ]; then
+            echo "✓ All 26 theme files present"
+          else
+            echo "✗ Missing $missing files"
+            exit 1
+          fi

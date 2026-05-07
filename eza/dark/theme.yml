@@ -1,0 +1,97 @@
+# designless-dark — eza theme
+# Install: copy dir to ~/.config/eza/dark/ and set EZA_CONFIG_DIR=~/.config/eza/dark
+
+colourful: true
+
+filekinds:
+ normal:      { foreground: "#5A5248" }
+ directory:   { foreground: "#4A8FD9" }
+ symlink:     { foreground: "#26C6C6" }
+ pipe:        { foreground: "#5A5248" }
+ block_device: { foreground: "#D71921" }
+ char_device: { foreground: "#D71921" }
+ socket:      { foreground: "#5A5248" }
+ special:     { foreground: "#9575CD" }
+ executable:  { foreground: "#5AB87A" }
+ mount_point: { foreground: "#26C6C6" }
+
+perms:
+ user_read:          { foreground: "#E5DDD0" }
+ user_write:         { foreground: "#E8A030" }
+ user_execute_file:  { foreground: "#5AB87A" }
+ user_execute_other: { foreground: "#4A8FD9" }
+ group_read:         { foreground: "#5A5248" }
+ group_write:        { foreground: "#E8A030" }
+ group_execute:      { foreground: "#4A8FD9" }
+ other_read:         { foreground: "#5A5248" }
+ other_write:        { foreground: "#D71921" }
+ other_execute:      { foreground: "#D71921" }
+ special_user_file:  { foreground: "#9575CD" }
+ special_other:      { foreground: "#5A5248" }
+ attribute:          { foreground: "#5A5248" }
+
+size:
+ major:       { foreground: "#5A5248" }
+ minor:       { foreground: "#26C6C6" }
+ number_byte: { foreground: "#E5DDD0" }
+ number_kilo: { foreground: "#5A5248" }
+ number_mega: { foreground: "#4A8FD9" }
+ number_giga: { foreground: "#9575CD" }
+ number_huge: { foreground: "#D71921" }
+ unit_byte:   { foreground: "#5A5248" }
+ unit_kilo:   { foreground: "#4A8FD9" }
+ unit_mega:   { foreground: "#9575CD" }
+ unit_giga:   { foreground: "#D71921" }
+ unit_huge:   { foreground: "#26C6C6" }
+
+users:
+ user_you:    { foreground: "#E5DDD0" }
+ user_root:   { foreground: "#D71921" }
+ user_other:  { foreground: "#9575CD" }
+ group_yours: { foreground: "#5A5248" }
+ group_other: { foreground: "#5A5248" }
+ group_root:  { foreground: "#D71921" }
+
+links:
+ normal:          { foreground: "#26C6C6" }
+ multi_link_file: { foreground: "#4A8FD9" }
+
+git:
+ new:        { foreground: "#4A8FD9" }
+ modified:   { foreground: "#E8A030" }
+ deleted:    { foreground: "#D71921" }
+ renamed:    { foreground: "#26C6C6" }
+ typechange: { foreground: "#5AB87A" }
+ ignored:    { foreground: "#5A5248" }
+ conflicted: { foreground: "#D71921" }
+
+git_repo:
+ branch_main:  { foreground: "#E5DDD0" }
+ branch_other: { foreground: "#9575CD" }
+ git_clean:    { foreground: "#5AB87A" }
+ git_dirty:    { foreground: "#D71921" }
+
+file_type:
+ image:      { foreground: "#E8A030" }
+ video:      { foreground: "#D71921" }
+ music:      { foreground: "#4A8FD9" }
+ lossless:   { foreground: "#26C6C6" }
+ crypto:     { foreground: "#5A5248" }
+ document:   { foreground: "#E5DDD0" }
+ compressed: { foreground: "#9575CD" }
+ temp:       { foreground: "#D71921" }
+ compiled:   { foreground: "#4A8FD9" }
+ build:      { foreground: "#5A5248" }
+ source:     { foreground: "#26C6C6" }
+
+punctuation:         { foreground: "#5A5248" }
+date:                { foreground: "#E8A030" }
+inode:               { foreground: "#5A5248" }
+blocks:              { foreground: "#5A5248" }
+header:              { foreground: "#E5DDD0" }
+octal:               { foreground: "#26C6C6" }
+flags:               { foreground: "#9575CD" }
+symlink_path:        { foreground: "#26C6C6" }
+control_char:        { foreground: "#4A8FD9" }
+broken_symlink:      { foreground: "#D71921" }
+broken_path_overlay: { foreground: "#5A5248" }

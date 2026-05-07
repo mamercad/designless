@@ -1,0 +1,9 @@
+{
+  "default": false,
+  "no-hard-tabs": true,
+  "no-trailing-spaces": true,
+  "no-multiple-blanks": {
+    "maximum": 1
+  },
+  "first-line-heading": true
+}

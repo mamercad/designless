@@ -1,0 +1,64 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.md"
+      - "**/*.yml"
+      - "**/*.yaml"
+      - "**/*.json"
+      - ".yamllint"
+      - ".markdownlintrc.json"
+      - ".github/workflows/lint.yml"
+  pull_request:
+    paths:
+      - "**/*.md"
+      - "**/*.yml"
+      - "**/*.yaml"
+      - "**/*.json"
+      - ".yamllint"
+      - ".markdownlintrc.json"
+      - ".github/workflows/lint.yml"
+
+jobs:
+  lint-json:
+    runs-on: ubuntu-latest
+    name: Validate JSON
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          for f in $(find . -type f -name "*.json" ! -path "./node_modules/*" ! -path "./.git/*"); do
+            if ! jq empty "$f" 2>/dev/null; then
+              echo "✗ Invalid JSON: $f"
+              exit 1
+            fi
+          done
+          echo "✓ All JSON files valid"
+
+  lint-yaml:
+    runs-on: ubuntu-latest
+    name: Lint YAML
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Lint YAML files
+        run: |
+          yamllint -c .yamllint --strict .github/workflows/*.yml .yamllint
+
+  lint-markdown:
+    runs-on: ubuntu-latest
+    name: Lint Markdown
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli2
+
+      - name: Lint Markdown files
+        run: markdownlint-cli2 "**/*.md" "#node_modules"

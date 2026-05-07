@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Designless — Warm monochrome for your entire terminal stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+/* ── Reset & base ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #090807;
+  color: #E5DDD0;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+code, pre, .mono {
+  font-family: "DM Mono", "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+}
+
+/* ── Tokens ────────────────────────────────────────────────────── */
+:root {
+  --bg:    #090807;
+  --surf:  #181614;
+  --raise: #1D1A17;
+  --bord:  #3A3632;
+  --mute:  #5A5248;
+  --fg:    #E5DDD0;
+  --acc:   #FF4719;
+  --red:   #D71921;
+  --grn:   #5AB87A;
+  --yel:   #E8A030;
+  --blu:   #4A8FD9;
+  --mag:   #9575CD;
+  --cyn:   #26C6C6;
+  /* Light palette */
+  --l-bg:   #FFFFFF;
+  --l-surf: #F4F0EB;
+  --l-bord: #DDD7D1;
+  --l-mute: #6B6560;
+  --l-fg:   #111111;
+  --l-grn:  #1E6B3C;
+  --l-yel:  #7A4A00;
+  --l-blu:  #1050A0;
+  --l-mag:  #5A2D9A;
+  --l-cyn:  #006E6E;
+}
+
+/* ── Light mode overrides ──────────────────────────────────────── */
+html.light {
+  --bg:    #FFFFFF;
+  --surf:  #F4F0EB;
+  --raise: #E8E4DF;
+  --bord:  #DDD7D1;
+  --mute:  #6B6560;
+  --fg:    #111111;
+  --red:   #C0000A;
+  --grn:   #1E6B3C;
+  --yel:   #7A4A00;
+  --blu:   #1050A0;
+  --mag:   #5A2D9A;
+  --cyn:   #006E6E;
+}
+html.light body { background: #FFFFFF; color: #111111; }
+html.light nav {
+  background: rgba(255,255,255,.92);
+  border-bottom-color: #DDD7D1;
+}
+html.light #hero { background: #F9F6F2; }
+html.light #hero::before {
+  background:
+    radial-gradient(ellipse at 70% 40%, rgba(255,71,25,.04) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 60%, rgba(16,80,160,.03) 0%, transparent 50%);
+}
+html.light h1 { color: #111111; }
+html.light .hero-sub { color: #6B6560; }
+html.light .btn-ghost { color: #6B6560; }
+html.light .btn-ghost:hover { color: #111111; }
+html.light .section-divider { background: #DDD7D1; }
+html.light #variants { background: #F0EDE8; }
+html.light .variants-head h2,
+html.light .palette-head h2,
+html.light .coverage-head h2,
+html.light .install-text h2 { color: #111111; }
+html.light .variants-head p,
+html.light .palette-head p,
+html.light .coverage-head p { color: #6B6560; }
+html.light #palette { background: #FFFFFF; }
+html.light #coverage { background: #F4F0EB; }
+html.light .tools-grid { border-color: #DDD7D1; }
+html.light .tool-card { background: #FFFFFF; }
+html.light .tool-card:hover { background: #FAFAF9; }
+html.light .tool-cat { background: #F0EDE8; border-color: #DDD7D1; color: #6B6560; }
+html.light .tool-icon { background: #E8E4DF; border-color: #DDD7D1; color: #6B6560; }
+html.light .tool-info h4 { color: #111111; }
+html.light .tool-info p { color: #6B6560; }
+html.light .tool-badge {
+  background: rgba(30,107,60,.1); color: #1E6B3C;
+  border-color: rgba(30,107,60,.2);
+}
+html.light #install { background: #FFFFFF; }
+html.light .install-text p { color: #6B6560; }
+html.light .step-num { border-color: #DDD7D1; color: #6B6560; }
+html.light .step-body h4 { color: #111111; }
+html.light .step-body p { color: #6B6560; }
+html.light .code-block { background: #F4F0EB; border-color: #DDD7D1; }
+html.light .cb-bar { background: #E8E4DF; border-color: #DDD7D1; }
+html.light .cb-body pre { color: #111111; }
+html.light .cb-cmt { color: #6B6560; }
+html.light .cb-cmd { color: #1E6B3C; }
+html.light .cb-opt { color: #1050A0; }
+html.light .cb-str { color: #006E6E; }
+html.light .palette-variant h3 { color: #6B6560; }
+html.light .sw-label { color: #6B6560; }
+html.light .sem-chip { border-color: #DDD7D1; background: #F9F6F2; }
+html.light .sem-chip .sem-name,
+html.light .sem-chip .sem-hex { color: #6B6560; }
+html.light footer { border-top-color: #DDD7D1; }
+html.light .footer-logo { color: #111111; }
+html.light .footer-links a { color: #6B6560; }
+html.light .footer-links a:hover { color: #111111; }
+/* Hero terminal swap */
+html.light .hero-term-dark { display: none; }
+html.light .hero-term-light { display: block; }
+
+/* ── Layout helpers ────────────────────────────────────────────── */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+.label {
+  font-size: 11px; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--acc);
+  display: block; margin-bottom: 16px;
+}
+
+/* ── Navigation ────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  border-bottom: 1px solid var(--bord);
+  background: rgba(9,8,7,.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 48px;
+  height: 56px;
+  display: flex; align-items: center; gap: 40px;
+}
+.nav-logo {
+  font-size: 15px; font-weight: 700; color: var(--fg);
+  text-decoration: none; letter-spacing: .01em;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--acc); }
+.nav-links { display: flex; gap: 28px; margin-left: auto; }
+.nav-links a {
+  font-size: 13.5px; color: var(--mute); text-decoration: none;
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--fg); }
+.nav-cta {
+  font-size: 13px; font-weight: 500;
+  background: var(--acc); color: #090807;
+  padding: 7px 16px; border-radius: 6px;
+  text-decoration: none; letter-spacing: .01em;
+  transition: opacity .15s;
+}
+.nav-cta:hover { opacity: .88; }
+
+/* ── Hero ──────────────────────────────────────────────────────── */
+#hero {
+  padding: 148px 0 80px;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+#hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 40%, rgba(255,71,25,.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 60%, rgba(74,143,217,.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  width: 100%;
+}
+.hero-text {}
+.hero-eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--acc);
+  margin-bottom: 20px;
+}
+h1 {
+  font-size: clamp(52px, 6vw, 80px);
+  font-weight: 800;
+  line-height: 1.0;
+  color: #fff;
+  letter-spacing: -.03em;
+  margin-bottom: 24px;
+}
+h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--acc) 0%, #ff7a4a 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: 18px; color: var(--mute); line-height: 1.65;
+  max-width: 440px; margin-bottom: 36px;
+  font-weight: 300;
+}
+.hero-pills {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 40px;
+}
+.pill {
+  font-size: 12px; font-weight: 400;
+  border: 1px solid var(--bord);
+  border-radius: 999px; padding: 4px 12px;
+  color: var(--mute);
+}
+.hero-actions { display: flex; gap: 14px; align-items: center; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--acc); color: #090807;
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  padding: 12px 24px; border-radius: 8px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: opacity .15s;
+}
+.btn-primary:hover { opacity: .88; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--mute); font-size: 14px; font-weight: 400;
+  text-decoration: none; transition: color .15s;
+}
+.btn-ghost:hover { color: var(--fg); }
+
+/* Hero terminal mockup */
+.hero-terminal {
+  position: relative;
+}
+.hero-terminal::before {
+  content: "";
+  position: absolute; inset: -2px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255,71,25,.2), transparent 50%);
+  z-index: -1;
+}
+
+/* ── Terminal window component ─────────────────────────────────── */
+.term-win {
+  border-radius: 12px;
+  border: 1px solid var(--bord);
+  box-shadow: 0 32px 80px rgba(0,0,0,.65);
+  overflow: hidden;
+  font-family: "DM Mono","JetBrains Mono","SF Mono",ui-monospace,monospace;
+}
+.term-win.light {
+  border-color: #DDD7D1;
+  box-shadow: 0 20px 60px rgba(0,0,0,.15);
+}
+.tw-bar {
+  height: 36px;
+  display: flex; align-items: center;
+  padding: 0 14px; gap: 7px;
+  border-bottom: 1px solid var(--bord);
+  background: #0d0b0a;
+}
+.term-win.light .tw-bar {
+  background: #f5f1ec;
+  border-color: #DDD7D1;
+}
+.tw-dot { width: 11px; height: 11px; border-radius: 50%; }
+.tw-dot.r { background: #FF5F56; }
+.tw-dot.y { background: #FFBD2E; }
+.tw-dot.g { background: #27C93F; }
+.tw-title {
+  flex: 1; text-align: center;
+  font-size: 11px; color: var(--mute); letter-spacing: .03em;
+  font-family: inherit;
+}
+.term-win.light .tw-title { color: #6B6560; }
+.tw-body {
+  background: var(--bg);
+  padding: 14px 16px;
+  font-size: 12px; line-height: 1.6;
+  overflow: hidden;
+}
+.term-win.light .tw-body { background: #fff; }
+.tl { display: block; white-space: pre; }
+
+/* Dark tokens */
+.dk  { color: #9575CD; font-weight: 600; }
+.ds  { color: #5AB87A; }
+.dn  { color: #E8A030; }
+.df  { color: #26C6C6; }
+.dm  { color: #5A5248; font-style: italic; }
+.dfl { color: #B39DDB; }
+.dp  { color: #FF4719; }
+.dpu { color: #4a4440; }
+
+/* Light tokens */
+.lk  { color: #5A2D9A; font-weight: 600; }
+.ls  { color: #1E6B3C; }
+.ln_ { color: #7A4A00; }
+.lf  { color: #006E6E; }
+.lm  { color: #6B6560; font-style: italic; }
+.lfl { color: #7A40C0; }
+.lp  { color: #FF4719; }
+.lpu { color: #b0a8a0; }
+
+.tw-vsl {
+  height: 20px;
+  display: flex; align-items: center;
+  background: #0d0b0a;
+  border-top: 1px solid var(--bord);
+  font-size: 10px;
+}
+.term-win.light .tw-vsl {
+  background: #f5f1ec;
+  border-color: #DDD7D1;
+}
+.tvsl-mode {
+  background: var(--acc); color: #090807;
+  font-weight: 700; padding: 0 8px; height: 100%;
+  display: flex; align-items: center; font-size: 9.5px; letter-spacing: .06em;
+}
+.tvsl-rest { flex: 1; padding: 0 8px; color: var(--mute); }
+.term-win.light .tvsl-rest { color: #6B6560; }
+.tvsl-pos { padding: 0 8px; color: var(--fg); }
+.term-win.light .tvsl-pos { color: #111; }
+.tw-tmux {
+  height: 19px;
+  display: flex; align-items: center;
+  background: #0d0b0a;
+  border-top: 1px solid var(--bord);
+  font-size: 10px;
+}
+.term-win.light .tw-tmux { background: #f5f1ec; border-color: #DDD7D1; }
+.ttmux-sess {
+  background: var(--acc); color: #090807;
+  font-weight: 700; padding: 0 10px; height: 100%;
+  display: flex; align-items: center;
+  font-size: 9.5px; letter-spacing: .05em;
+}
+.ttmux-w  { padding: 0 8px; color: var(--mute); }
+.ttmux-w.on { color: var(--fg); }
+.term-win.light .ttmux-w.on { color: #111; }
+.ttmux-sp { flex: 1; }
+.ttmux-rt { padding: 0 10px; color: var(--mute); }
+
+/* ── Divider ───────────────────────────────────────────────────── */
+.section-divider {
+  height: 1px; background: var(--bord);
+  margin: 0;
+}
+
+/* ── Variants side-by-side ─────────────────────────────────────── */
+#variants {
+  padding: 100px 0;
+  background: #0b0907;
+}
+.variants-head { text-align: center; margin-bottom: 60px; }
+.variants-head h2 {
+  font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+  letter-spacing: -.025em; color: #fff; margin-bottom: 12px;
+}
+.variants-head p { font-size: 16px; color: var(--mute); max-width: 480px; margin: 0 auto; font-weight: 300; }
+.variants-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.variant-card { display: flex; flex-direction: column; gap: 16px; }
+.variant-label {
+  font-size: 12px; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--mute);
+  padding: 0 4px;
+}
+
+/* ── Palette ───────────────────────────────────────────────────── */
+#palette {
+  padding: 100px 0;
+}
+.palette-head { margin-bottom: 60px; }
+.palette-head h2 {
+  font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+  letter-spacing: -.025em; color: #fff; margin-bottom: 12px;
+}
+.palette-head p { font-size: 16px; color: var(--mute); max-width: 520px; font-weight: 300; }
+.palette-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.palette-variant h3 {
+  font-size: 13px; font-weight: 500; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--mute);
+  margin-bottom: 20px;
+}
+.swatches {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.swatch-row {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.sw {
+  border-radius: 6px; height: 48px;
+  position: relative;
+  transition: transform .15s;
+  cursor: default;
+}
+.sw:hover { transform: translateY(-2px); }
+.sw-label {
+  display: block;
+  font-family: "DM Mono", monospace;
+  font-size: 9.5px; color: var(--mute);
+  margin-top: 5px; text-align: center;
+  letter-spacing: .03em;
+}
+.swatch-accent {
+  height: 56px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  font-family: "DM Mono", monospace;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: .04em;
+}
+.semantic-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+.sem-chip {
+  border-radius: 6px;
+  padding: 8px 6px;
+  display: flex; flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--bord);
+}
+.sem-chip .sem-dot {
+  width: 20px; height: 20px; border-radius: 4px;
+}
+.sem-chip .sem-name {
+  font-size: 9px; font-weight: 500;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--mute);
+  font-family: "DM Mono", monospace;
+}
+.sem-chip .sem-hex {
+  font-size: 9px;
+  color: var(--mute);
+  font-family: "DM Mono", monospace;
+}
+
+/* ── Coverage ──────────────────────────────────────────────────── */
+#coverage {
+  padding: 100px 0;
+  background: #0b0907;
+}
+.coverage-head { text-align: center; margin-bottom: 60px; }
+.coverage-head h2 {
+  font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+  letter-spacing: -.025em; color: #fff; margin-bottom: 12px;
+}
+.coverage-head p { font-size: 16px; color: var(--mute); max-width: 480px; margin: 0 auto; font-weight: 300; }
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  border: 1px solid var(--bord);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.tool-card {
+  background: #0d0b0a;
+  padding: 24px 28px;
+  display: flex; align-items: flex-start; gap: 16px;
+  transition: background .15s;
+}
+.tool-card:hover { background: #111009; }
+.tool-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--raise); border: 1px solid var(--bord);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; flex-shrink: 0;
+  font-family: "DM Mono", monospace;
+  color: var(--mute);
+}
+.tool-info h4 { font-size: 14px; font-weight: 500; color: var(--fg); margin-bottom: 3px; }
+.tool-info p  { font-size: 12px; color: var(--mute); line-height: 1.4; }
+.tool-badge {
+  margin-left: auto; flex-shrink: 0;
+  font-size: 9.5px; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase;
+  background: rgba(90,184,122,.12); color: var(--grn);
+  border: 1px solid rgba(90,184,122,.2);
+  padding: 3px 8px; border-radius: 999px;
+}
+.tool-cat {
+  background: #0b0907;
+  padding: 12px 28px;
+  font-size: 10px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--mute);
+  border-top: 1px solid var(--bord);
+  grid-column: span 3;
+}
+
+/* ── Install ───────────────────────────────────────────────────── */
+#install {
+  padding: 100px 0 120px;
+}
+.install-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.install-text {}
+.install-text h2 {
+  font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+  letter-spacing: -.025em; color: #fff; margin-bottom: 16px;
+}
+.install-text p {
+  font-size: 16px; color: var(--mute); line-height: 1.7;
+  margin-bottom: 32px; font-weight: 300;
+}
+.step {
+  display: flex; gap: 16px; margin-bottom: 24px;
+}
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid var(--bord);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--mute); flex-shrink: 0;
+  margin-top: 2px;
+  font-family: "DM Mono", monospace;
+}
+.step-body h4 { font-size: 14px; font-weight: 500; color: var(--fg); margin-bottom: 4px; }
+.step-body p  { font-size: 13px; color: var(--mute); line-height: 1.5; }
+.code-block {
+  background: #0d0b0a;
+  border: 1px solid var(--bord);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.cb-bar {
+  height: 36px;
+  border-bottom: 1px solid var(--bord);
+  display: flex; align-items: center;
+  padding: 0 14px; gap: 7px;
+  background: #111009;
+}
+.cb-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--bord); }
+.cb-title {
+  flex: 1; text-align: center;
+  font-size: 11px; color: var(--mute); letter-spacing: .03em;
+  font-family: "DM Mono", monospace;
+}
+.cb-body { padding: 24px; }
+.cb-body pre {
+  font-family: "DM Mono","JetBrains Mono","SF Mono",ui-monospace,monospace;
+  font-size: 13px; line-height: 1.8;
+  color: var(--fg);
+}
+.cb-cmt  { color: var(--mute); }
+.cb-cmd  { color: var(--grn); }
+.cb-opt  { color: var(--blu); }
+.cb-acc  { color: var(--acc); }
+.cb-str  { color: var(--cyn); }
+.cb-pr   { color: var(--acc); user-select: none; }
+
+/* ── Theme toggle ──────────────────────────────────────────────── */
+.theme-toggle {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--bord);
+  background: transparent;
+  color: var(--mute);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: color .15s, border-color .15s, background .15s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { color: var(--fg); background: var(--raise); }
+.theme-toggle svg { width: 15px; height: 15px; }
+.icon-sun  { display: none; }
+.icon-moon { display: block; }
+html.light .icon-sun  { display: block; }
+html.light .icon-moon { display: none; }
+
+/* ── Footer ────────────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--bord);
+  padding: 32px 0;
+}
+.footer-inner {
+  display: flex; align-items: center;
+  max-width: 1200px; margin: 0 auto; padding: 0 48px;
+}
+.footer-logo {
+  font-size: 14px; font-weight: 700; color: var(--fg);
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-logo .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acc); }
+.footer-links {
+  margin-left: auto; display: flex; gap: 24px;
+}
+.footer-links a {
+  font-size: 13px; color: var(--mute); text-decoration: none;
+  transition: color .15s;
+}
+.footer-links a:hover { color: var(--fg); }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <span class="dot"></span>
+      Designless
+    </a>
+    <div class="nav-links">
+      <a href="#variants">Variants</a>
+      <a href="#palette">Palette</a>
+      <a href="#coverage">Coverage</a>
+      <a href="#install">Install</a>
+    </div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+      <!-- Sun: shown in light mode, click to go dark -->
+      <svg class="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <circle cx="8" cy="8" r="3"/>
+        <line x1="8" y1="1" x2="8" y2="2.5"/>
+        <line x1="8" y1="13.5" x2="8" y2="15"/>
+        <line x1="1" y1="8" x2="2.5" y2="8"/>
+        <line x1="13.5" y1="8" x2="15" y2="8"/>
+        <line x1="3.05" y1="3.05" x2="4.1" y2="4.1"/>
+        <line x1="11.9" y1="11.9" x2="12.95" y2="12.95"/>
+        <line x1="12.95" y1="3.05" x2="11.9" y2="4.1"/>
+        <line x1="4.1" y1="11.9" x2="3.05" y2="12.95"/>
+      </svg>
+      <!-- Moon: shown in dark mode, click to go light -->
+      <svg class="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13.5 10A6 6 0 0 1 6 2.5a6 6 0 1 0 7.5 7.5Z"/>
+      </svg>
+    </button>
+    <a class="nav-cta" href="#install">Get started</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-eyebrow">Design system · v1.0</div>
+        <h1>Warm mono&shy;chrome for every tool.</h1>
+        <p class="hero-sub">
+          One palette, two variants, thirteen tools.
+          Designless brings coherence to your entire terminal environment
+          without compromising on character.
+        </p>
+        <div class="hero-pills">
+          <span class="pill">VS Code</span>
+          <span class="pill">Neovim</span>
+          <span class="pill">tmux</span>
+          <span class="pill">delta</span>
+          <span class="pill">eza</span>
+          <span class="pill">Ghostty</span>
+          <span class="pill">iTerm2</span>
+          <span class="pill">fzf</span>
+          <span class="pill">lazygit</span>
+          <span class="pill">+ 4 more</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#install">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3.5 6.5 7 10l3.5-3.5M2 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            make install
+          </a>
+          <a class="btn-ghost" href="#variants">
+            See both variants →
+          </a>
+        </div>
+      </div>
+      <div class="hero-terminal">
+        <!-- Dark terminal (default) -->
+        <div class="hero-term-dark">
+          <div class="term-win" style="font-size:11px;">
+            <div class="tw-bar">
+              <span class="tw-dot r"></span><span class="tw-dot y"></span><span class="tw-dot g"></span>
+              <span class="tw-title">nvim · designless-dark.lua</span>
+            </div>
+            <div class="tw-body" style="background:#090807;">
+<span class="tl"><span style="color:#5A5248">  1</span>  <span class="df">vim.cmd</span><span class="dpu">(</span><span class="ds">"highlight clear"</span><span class="dpu">)</span></span>
+<span class="tl"><span style="color:#5A5248">  2</span></span>
+<span class="tl"><span style="color:#5A5248">  3</span>  <span class="dk">local</span> <span style="color:#E5DDD0">c</span> <span style="color:#E5DDD0;opacity:.6">=</span> <span class="dpu">{</span></span>
+<span class="tl"><span style="color:#5A5248">  4</span>    <span class="dfl">bg</span>      <span style="color:#E5DDD0;opacity:.6">=</span> <span class="ds">"#090807"</span><span class="dpu">,</span></span>
+<span class="tl"><span style="color:#5A5248">  5</span>    <span class="dfl">fg</span>      <span style="color:#E5DDD0;opacity:.6">=</span> <span class="ds">"#E5DDD0"</span><span class="dpu">,</span></span>
+<span class="tl" style="background:#1D1A17"><span style="color:#E5DDD0">  6</span>    <span class="dfl">accent</span>  <span style="color:#E5DDD0;opacity:.6">=</span> <span class="ds">"#FF4719"</span><span class="dpu">,</span></span>
+<span class="tl"><span style="color:#5A5248">  7</span>    <span class="dfl">red</span>     <span style="color:#E5DDD0;opacity:.6">=</span> <span class="ds">"#D71921"</span><span class="dpu">,</span></span>
+<span class="tl"><span style="color:#5A5248">  8</span>    <span class="dfl">green</span>   <span style="color:#E5DDD0;opacity:.6">=</span> <span class="ds">"#5AB87A"</span><span class="dpu">,</span></span>
+<span class="tl"><span style="color:#5A5248">  9</span>    <span class="dfl">blue</span>    <span style="color:#E5DDD0;opacity:.6">=</span> <span class="ds">"#4A8FD9"</span><span class="dpu">,</span></span>
+<span class="tl"><span style="color:#5A5248"> 10</span>    <span class="dfl">magenta</span> <span style="color:#E5DDD0;opacity:.6">=</span> <span class="ds">"#9575CD"</span><span class="dpu">,</span></span>
+<span class="tl"><span style="color:#5A5248"> 11</span>    <span class="dfl">cyan</span>    <span style="color:#E5DDD0;opacity:.6">=</span> <span class="ds">"#26C6C6"</span><span class="dpu">,</span></span>
+<span class="tl"><span style="color:#5A5248"> 12</span>  <span class="dpu">}</span></span>
+<span class="tl"><span style="color:#5A5248"> 13</span></span>
+<span class="tl"><span style="color:#5A5248"> 14</span>  <span class="dk">local</span> <span class="dk">function</span> <span class="df">hl</span><span class="dpu">(</span><span style="color:#E5DDD0">group</span><span class="dpu">,</span> <span style="color:#E5DDD0">spec</span><span class="dpu">)</span></span>
+<span class="tl"><span style="color:#5A5248"> 15</span>    <span class="df">vim.api.nvim_set_hl</span><span class="dpu">(</span><span class="dn">0</span><span class="dpu">,</span> <span style="color:#E5DDD0">group</span><span class="dpu">,</span> <span style="color:#E5DDD0">spec</span><span class="dpu">)</span></span>
+<span class="tl"><span style="color:#5A5248"> 16</span>  <span class="dk">end</span></span>
+<span class="tl"><span style="color:#5A5248"> 17</span></span>
+<span class="tl"><span style="color:#5A5248"> 18</span>  <span class="df">hl</span><span class="dpu">(</span><span class="ds">"Comment"</span><span class="dpu">,</span> <span class="dpu">{</span> <span class="dfl">fg</span> <span style="color:#E5DDD0;opacity:.6">=</span> <span style="color:#E5DDD0">c</span><span class="dpu">.</span><span class="dfl">muted</span><span class="dpu">,</span> <span class="dfl">italic</span> <span style="color:#E5DDD0;opacity:.6">=</span> <span class="dk">true</span> <span class="dpu">})</span></span>
+<span class="tl"><span style="color:#5A5248"> 19</span>  <span class="df">hl</span><span class="dpu">(</span><span class="ds">"String"</span><span class="dpu">,</span>  <span class="dpu">{</span> <span class="dfl">fg</span> <span style="color:#E5DDD0;opacity:.6">=</span> <span style="color:#E5DDD0">c</span><span class="dpu">.</span><span class="dfl">green</span> <span class="dpu">})</span></span>
+<span class="tl"><span style="color:#5A5248"> 20</span>  <span class="df">hl</span><span class="dpu">(</span><span class="ds">"Keyword"</span><span class="dpu">,</span> <span class="dpu">{</span> <span class="dfl">fg</span> <span style="color:#E5DDD0;opacity:.6">=</span> <span style="color:#E5DDD0">c</span><span class="dpu">.</span><span class="dfl">magenta</span> <span class="dpu">})</span></span>
+            </div>
+            <div class="tw-vsl">
+              <span class="tvsl-mode">NORMAL</span>
+              <span class="tvsl-rest">  main  designless-dark.lua</span>
+              <span class="tvsl-pos">lua  6:10</span>
+            </div>
+            <div class="tw-tmux">
+              <span class="ttmux-sess">designless</span>
+              <span class="ttmux-w on">1:nvim</span>
+              <span class="ttmux-w">2:shell</span>
+              <span class="ttmux-sp"></span>
+              <span class="ttmux-rt"> main</span>
+            </div>
+          </div>
+        </div>
+        <!-- Light terminal (shown when html.light) -->
+        <div class="hero-term-light" style="display:none;">
+          <div class="term-win light" style="font-size:11px;">
+            <div class="tw-bar">
+              <span class="tw-dot r"></span><span class="tw-dot y"></span><span class="tw-dot g"></span>
+              <span class="tw-title" style="color:#6B6560;">nvim · designless-light.lua</span>
+            </div>
+            <div class="tw-body" style="background:#fff;">
+<span class="tl"><span style="color:#6B6560">  1</span>  <span class="lf">vim.cmd</span><span class="lpu">(</span><span class="ls">"highlight clear"</span><span class="lpu">)</span></span>
+<span class="tl"><span style="color:#6B6560">  2</span></span>
+<span class="tl"><span style="color:#6B6560">  3</span>  <span class="lk">local</span> <span style="color:#111">c</span> <span style="color:#111;opacity:.5">=</span> <span class="lpu">{</span></span>
+<span class="tl"><span style="color:#6B6560">  4</span>    <span class="lfl">bg</span>      <span style="color:#111;opacity:.5">=</span> <span class="ls">"#FFFFFF"</span><span class="lpu">,</span></span>
+<span class="tl"><span style="color:#6B6560">  5</span>    <span class="lfl">fg</span>      <span style="color:#111;opacity:.5">=</span> <span class="ls">"#111111"</span><span class="lpu">,</span></span>
+<span class="tl" style="background:#f0ece6"><span style="color:#111">  6</span>    <span class="lfl">accent</span>  <span style="color:#111;opacity:.5">=</span> <span class="ls">"#FF4719"</span><span class="lpu">,</span></span>
+<span class="tl"><span style="color:#6B6560">  7</span>    <span class="lfl">red</span>     <span style="color:#111;opacity:.5">=</span> <span class="ls">"#C0000A"</span><span class="lpu">,</span></span>
+<span class="tl"><span style="color:#6B6560">  8</span>    <span class="lfl">green</span>   <span style="color:#111;opacity:.5">=</span> <span class="ls">"#1E6B3C"</span><span class="lpu">,</span></span>
+<span class="tl"><span style="color:#6B6560">  9</span>    <span class="lfl">blue</span>    <span style="color:#111;opacity:.5">=</span> <span class="ls">"#1050A0"</span><span class="lpu">,</span></span>
+<span class="tl"><span style="color:#6B6560"> 10</span>    <span class="lfl">magenta</span> <span style="color:#111;opacity:.5">=</span> <span class="ls">"#5A2D9A"</span><span class="lpu">,</span></span>
+<span class="tl"><span style="color:#6B6560"> 11</span>    <span class="lfl">cyan</span>    <span style="color:#111;opacity:.5">=</span> <span class="ls">"#006E6E"</span><span class="lpu">,</span></span>
+<span class="tl"><span style="color:#6B6560"> 12</span>  <span class="lpu">}</span></span>
+<span class="tl"><span style="color:#6B6560"> 13</span></span>
+<span class="tl"><span style="color:#6B6560"> 14</span>  <span class="lk">local</span> <span class="lk">function</span> <span class="lf">hl</span><span class="lpu">(</span><span style="color:#111">group</span><span class="lpu">,</span> <span style="color:#111">spec</span><span class="lpu">)</span></span>
+<span class="tl"><span style="color:#6B6560"> 15</span>    <span class="lf">vim.api.nvim_set_hl</span><span class="lpu">(</span><span class="ln_">0</span><span class="lpu">,</span> <span style="color:#111">group</span><span class="lpu">,</span> <span style="color:#111">spec</span><span class="lpu">)</span></span>
+<span class="tl"><span style="color:#6B6560"> 16</span>  <span class="lk">end</span></span>
+<span class="tl"><span style="color:#6B6560"> 17</span></span>
+<span class="tl"><span style="color:#6B6560"> 18</span>  <span class="lf">hl</span><span class="lpu">(</span><span class="ls">"Comment"</span><span class="lpu">,</span> <span class="lpu">{</span> <span class="lfl">fg</span> <span style="color:#111;opacity:.5">=</span> <span style="color:#111">c</span><span class="lpu">.</span><span class="lfl">muted</span><span class="lpu">,</span> <span class="lfl">italic</span> <span style="color:#111;opacity:.5">=</span> <span class="lk">true</span> <span class="lpu">})</span></span>
+<span class="tl"><span style="color:#6B6560"> 19</span>  <span class="lf">hl</span><span class="lpu">(</span><span class="ls">"String"</span><span class="lpu">,</span>  <span class="lpu">{</span> <span class="lfl">fg</span> <span style="color:#111;opacity:.5">=</span> <span style="color:#111">c</span><span class="lpu">.</span><span class="lfl">green</span> <span class="lpu">})</span></span>
+<span class="tl"><span style="color:#6B6560"> 20</span>  <span class="lf">hl</span><span class="lpu">(</span><span class="ls">"Keyword"</span><span class="lpu">,</span> <span class="lpu">{</span> <span class="lfl">fg</span> <span style="color:#111;opacity:.5">=</span> <span style="color:#111">c</span><span class="lpu">.</span><span class="lfl">magenta</span> <span class="lpu">})</span></span>
+            </div>
+            <div class="tw-vsl" style="background:#f5f1ec; border-color:#DDD7D1;">
+              <span class="tvsl-mode">NORMAL</span>
+              <span class="tvsl-rest" style="color:#6B6560;">  main  designless-light.lua</span>
+              <span class="tvsl-pos" style="color:#111;">lua  6:10</span>
+            </div>
+            <div class="tw-tmux" style="background:#f5f1ec; border-color:#DDD7D1;">
+              <span class="ttmux-sess">designless</span>
+              <span class="ttmux-w on" style="color:#111;">1:nvim</span>
+              <span class="ttmux-w">2:shell</span>
+              <span class="ttmux-sp"></span>
+              <span class="ttmux-rt"> main</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Variants side-by-side -->
+<section id="variants">
+  <div class="wrap">
+    <div class="variants-head">
+      <span class="label">Two variants</span>
+      <h2>Dark and light. Both feel like home.</h2>
+      <p>The same warm palette translated faithfully across both modes. Neither is an afterthought.</p>
+    </div>
+    <div class="variants-grid">
+
+      <!-- Dark variant -->
+      <div class="variant-card">
+        <div class="variant-label">Dark variant</div>
+        <div class="term-win" style="font-size:11px;">
+          <div class="tw-bar">
+            <span class="tw-dot r"></span><span class="tw-dot y"></span><span class="tw-dot g"></span>
+            <span class="tw-title">designless-dark</span>
+          </div>
+          <div class="tw-body" style="background:#090807; height:280px; overflow:hidden;">
+<span class="tl"><span class="dm">-- designless-dark.lua · warm monochrome</span></span>
+<span class="tl"></span>
+<span class="tl"><span class="dk">local</span> <span style="color:#E5DDD0">c</span> <span style="color:#E5DDD0;opacity:.5">=</span> <span class="dpu">{</span></span>
+<span class="tl">  <span class="dfl">bg</span>      <span style="color:#E5DDD0;opacity:.5">=</span> <span class="ds">"#090807"</span><span class="dpu">,</span>  <span class="dm">-- near black</span></span>
+<span class="tl">  <span class="dfl">fg</span>      <span style="color:#E5DDD0;opacity:.5">=</span> <span class="ds">"#E5DDD0"</span><span class="dpu">,</span>  <span class="dm">-- warm cream</span></span>
+<span class="tl" style="background:#1D1A17">  <span class="dfl">accent</span>  <span style="color:#E5DDD0;opacity:.5">=</span> <span class="ds">"#FF4719"</span><span class="dpu">,</span>  <span class="dm">-- molten orange</span></span>
+<span class="tl">  <span class="dfl">green</span>   <span style="color:#E5DDD0;opacity:.5">=</span> <span class="ds">"#5AB87A"</span><span class="dpu">,</span>  <span class="dm">-- string</span></span>
+<span class="tl">  <span class="dfl">yellow</span>  <span style="color:#E5DDD0;opacity:.5">=</span> <span class="ds">"#E8A030"</span><span class="dpu">,</span>  <span class="dm">-- number</span></span>
+<span class="tl">  <span class="dfl">blue</span>    <span style="color:#E5DDD0;opacity:.5">=</span> <span class="ds">"#4A8FD9"</span><span class="dpu">,</span>  <span class="dm">-- type</span></span>
+<span class="tl">  <span class="dfl">magenta</span> <span style="color:#E5DDD0;opacity:.5">=</span> <span class="ds">"#9575CD"</span><span class="dpu">,</span>  <span class="dm">-- keyword</span></span>
+<span class="tl">  <span class="dfl">cyan</span>    <span style="color:#E5DDD0;opacity:.5">=</span> <span class="ds">"#26C6C6"</span><span class="dpu">,</span>  <span class="dm">-- function</span></span>
+<span class="tl"><span class="dpu">}</span></span>
+<span class="tl"></span>
+<span class="tl"><span class="dk">function</span> <span class="df">M.setup</span><span class="dpu">()</span></span>
+<span class="tl">  <span class="df">vim.o</span><span class="dpu">.</span><span class="dfl">background</span> <span style="color:#E5DDD0;opacity:.5">=</span> <span class="ds">"dark"</span></span>
+<span class="tl">  <span class="df">vim.g</span><span class="dpu">.</span><span class="dfl">colors_name</span> <span style="color:#E5DDD0;opacity:.5">=</span> <span class="ds">"designless-dark"</span></span>
+<span class="tl"><span class="dk">end</span></span>
+          </div>
+          <div class="tw-vsl">
+            <span class="tvsl-mode">NORMAL</span>
+            <span class="tvsl-rest">  main  designless-dark.lua</span>
+            <span class="tvsl-pos">lua  6:10</span>
+          </div>
+          <div class="tw-tmux">
+            <span class="ttmux-sess">designless</span>
+            <span class="ttmux-w on">1:nvim</span>
+            <span class="ttmux-w">2:shell</span>
+            <span class="ttmux-sp"></span>
+            <span class="ttmux-rt"> main  ·  14:23</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Light variant -->
+      <div class="variant-card">
+        <div class="variant-label">Light variant</div>
+        <div class="term-win light" style="font-size:11px;">
+          <div class="tw-bar">
+            <span class="tw-dot r"></span><span class="tw-dot y"></span><span class="tw-dot g"></span>
+            <span class="tw-title" style="color:#6B6560;">designless-light</span>
+          </div>
+          <div class="tw-body" style="height:280px; overflow:hidden;">
+<span class="tl"><span class="lm">-- designless-light.lua · warm monochrome</span></span>
+<span class="tl"></span>
+<span class="tl"><span class="lk">local</span> <span style="color:#111">c</span> <span style="color:#111;opacity:.4">=</span> <span class="lpu">{</span></span>
+<span class="tl">  <span class="lfl">bg</span>      <span style="color:#111;opacity:.4">=</span> <span class="ls">"#FFFFFF"</span><span class="lpu">,</span>  <span class="lm">-- white</span></span>
+<span class="tl">  <span class="lfl">fg</span>      <span style="color:#111;opacity:.4">=</span> <span class="ls">"#111111"</span><span class="lpu">,</span>  <span class="lm">-- near black</span></span>
+<span class="tl" style="background:#f0ece6">  <span class="lfl">accent</span>  <span style="color:#111;opacity:.4">=</span> <span class="ls">"#FF4719"</span><span class="lpu">,</span>  <span class="lm">-- molten orange</span></span>
+<span class="tl">  <span class="lfl">green</span>   <span style="color:#111;opacity:.4">=</span> <span class="ls">"#1E6B3C"</span><span class="lpu">,</span>  <span class="lm">-- string</span></span>
+<span class="tl">  <span class="lfl">yellow</span>  <span style="color:#111;opacity:.4">=</span> <span class="ls">"#7A4A00"</span><span class="lpu">,</span>  <span class="lm">-- number</span></span>
+<span class="tl">  <span class="lfl">blue</span>    <span style="color:#111;opacity:.4">=</span> <span class="ls">"#1050A0"</span><span class="lpu">,</span>  <span class="lm">-- type</span></span>
+<span class="tl">  <span class="lfl">magenta</span> <span style="color:#111;opacity:.4">=</span> <span class="ls">"#5A2D9A"</span><span class="lpu">,</span>  <span class="lm">-- keyword</span></span>
+<span class="tl">  <span class="lfl">cyan</span>    <span style="color:#111;opacity:.4">=</span> <span class="ls">"#006E6E"</span><span class="lpu">,</span>  <span class="lm">-- function</span></span>
+<span class="tl"><span class="lpu">}</span></span>
+<span class="tl"></span>
+<span class="tl"><span class="lk">function</span> <span class="lf">M.setup</span><span class="lpu">()</span></span>
+<span class="tl">  <span class="lf">vim.o</span><span class="lpu">.</span><span class="lfl">background</span> <span style="color:#111;opacity:.4">=</span> <span class="ls">"light"</span></span>
+<span class="tl">  <span class="lf">vim.g</span><span class="lpu">.</span><span class="lfl">colors_name</span> <span style="color:#111;opacity:.4">=</span> <span class="ls">"designless-light"</span></span>
+<span class="tl"><span class="lk">end</span></span>
+          </div>
+          <div class="tw-vsl" style="background:#f5f1ec; border-color:#DDD7D1;">
+            <span class="tvsl-mode">NORMAL</span>
+            <span class="tvsl-rest" style="color:#6B6560;">  main  designless-light.lua</span>
+            <span class="tvsl-pos" style="color:#111;">lua  6:10</span>
+          </div>
+          <div class="tw-tmux" style="background:#f5f1ec; border-color:#DDD7D1;">
+            <span class="ttmux-sess">designless</span>
+            <span class="ttmux-w on" style="color:#111;">1:nvim</span>
+            <span class="ttmux-w">2:shell</span>
+            <span class="ttmux-sp"></span>
+            <span class="ttmux-rt"> main  ·  14:23</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Palette -->
+<section id="palette">
+  <div class="wrap">
+    <div class="palette-head">
+      <span class="label">Color system</span>
+      <h2>One accent. No compromises.</h2>
+      <p>Warm grays anchor both variants. A single molten orange fires at exactly one moment: focus, selection, active state.</p>
+    </div>
+    <div class="palette-cols">
+
+      <!-- Dark palette -->
+      <div class="palette-variant">
+        <h3>Dark variant</h3>
+        <div class="swatch-accent" style="background:rgba(255,71,25,.12); color:#FF4719; border:1px solid rgba(255,71,25,.25);">
+          accent  #FF4719  —  molten orange
+        </div>
+        <div class="swatch-row">
+          <div>
+            <div class="sw" style="background:#090807; border:1px solid #3A3632;"></div>
+            <span class="sw-label">bg</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#181614;"></div>
+            <span class="sw-label">surface</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#1D1A17;"></div>
+            <span class="sw-label">raised</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#3A3632;"></div>
+            <span class="sw-label">border</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#5A5248;"></div>
+            <span class="sw-label">muted</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#E5DDD0;"></div>
+            <span class="sw-label">fg</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#FFFFFF;"></div>
+            <span class="sw-label">bright</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#FF4719;"></div>
+            <span class="sw-label">accent</span>
+          </div>
+        </div>
+        <div style="margin-bottom:12px; font-size:11px; color:var(--mute); letter-spacing:.06em; text-transform:uppercase;">Semantic tokens</div>
+        <div class="semantic-row">
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#5A5248;"></div>
+            <span class="sem-name">comment</span>
+            <span class="sem-hex">#5A5248</span>
+          </div>
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#5AB87A;"></div>
+            <span class="sem-name">string</span>
+            <span class="sem-hex">#5AB87A</span>
+          </div>
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#E8A030;"></div>
+            <span class="sem-name">number</span>
+            <span class="sem-hex">#E8A030</span>
+          </div>
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#9575CD;"></div>
+            <span class="sem-name">keyword</span>
+            <span class="sem-hex">#9575CD</span>
+          </div>
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#4A8FD9;"></div>
+            <span class="sem-name">type</span>
+            <span class="sem-hex">#4A8FD9</span>
+          </div>
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#26C6C6;"></div>
+            <span class="sem-name">function</span>
+            <span class="sem-hex">#26C6C6</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Light palette -->
+      <div class="palette-variant">
+        <h3>Light variant</h3>
+        <div class="swatch-accent" style="background:rgba(255,71,25,.08); color:#FF4719; border:1px solid rgba(255,71,25,.2);">
+          accent  #FF4719  —  molten orange
+        </div>
+        <div class="swatch-row">
+          <div>
+            <div class="sw" style="background:#FFFFFF; border:1px solid #DDD7D1;"></div>
+            <span class="sw-label">bg</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#F4F0EB; border:1px solid #DDD7D1;"></div>
+            <span class="sw-label">surface</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#E8E4DF; border:1px solid #DDD7D1;"></div>
+            <span class="sw-label">raised</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#DDD7D1; border:1px solid #DDD7D1;"></div>
+            <span class="sw-label">border</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#6B6560;"></div>
+            <span class="sw-label">muted</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#111111;"></div>
+            <span class="sw-label">fg</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#000000;"></div>
+            <span class="sw-label">bright</span>
+          </div>
+          <div>
+            <div class="sw" style="background:#FF4719;"></div>
+            <span class="sw-label">accent</span>
+          </div>
+        </div>
+        <div style="margin-bottom:12px; font-size:11px; color:var(--mute); letter-spacing:.06em; text-transform:uppercase;">Semantic tokens</div>
+        <div class="semantic-row">
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#6B6560;"></div>
+            <span class="sem-name">comment</span>
+            <span class="sem-hex">#6B6560</span>
+          </div>
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#1E6B3C;"></div>
+            <span class="sem-name">string</span>
+            <span class="sem-hex">#1E6B3C</span>
+          </div>
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#7A4A00;"></div>
+            <span class="sem-name">number</span>
+            <span class="sem-hex">#7A4A00</span>
+          </div>
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#5A2D9A;"></div>
+            <span class="sem-name">keyword</span>
+            <span class="sem-hex">#5A2D9A</span>
+          </div>
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#1050A0;"></div>
+            <span class="sem-name">type</span>
+            <span class="sem-hex">#1050A0</span>
+          </div>
+          <div class="sem-chip">
+            <div class="sem-dot" style="background:#006E6E;"></div>
+            <span class="sem-name">function</span>
+            <span class="sem-hex">#006E6E</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Coverage -->
+<section id="coverage">
+  <div class="wrap">
+    <div class="coverage-head">
+      <span class="label">13 targets</span>
+      <h2>Every tool, one source of truth.</h2>
+      <p>All themes generated from a single shared palette. Change one value and every tool updates.</p>
+    </div>
+    <div class="tools-grid">
+
+      <div class="tool-cat">Editors</div>
+
+      <div class="tool-card">
+        <div class="tool-icon">VS</div>
+        <div class="tool-info">
+          <h4>VS Code</h4>
+          <p>Full syntax, UI, and terminal color support via extension</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">NV</div>
+        <div class="tool-info">
+          <h4>Neovim</h4>
+          <p>Lua colorscheme with TreeSitter and LSP highlight groups</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">VI</div>
+        <div class="tool-info">
+          <h4>Vim</h4>
+          <p>VimL colorscheme covering standard highlight groups</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+
+      <div class="tool-cat">Terminal Emulators</div>
+
+      <div class="tool-card">
+        <div class="tool-icon">GH</div>
+        <div class="tool-info">
+          <h4>Ghostty</h4>
+          <p>Native theme file for the Ghostty terminal emulator</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">IT</div>
+        <div class="tool-info">
+          <h4>iTerm2</h4>
+          <p>Dynamic Profile JSON with full 16-color ANSI palette</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">KT</div>
+        <div class="tool-info">
+          <h4>Kitty</h4>
+          <p>kitty.conf color include for seamless integration</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">WZ</div>
+        <div class="tool-info">
+          <h4>WezTerm</h4>
+          <p>TOML color scheme file for WezTerm configuration</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">AL</div>
+        <div class="tool-info">
+          <h4>Alacritty</h4>
+          <p>YAML color import for the Alacritty terminal</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card" style="visibility:hidden;"></div>
+
+      <div class="tool-cat">TUI Tools</div>
+
+      <div class="tool-card">
+        <div class="tool-icon">tm</div>
+        <div class="tool-info">
+          <h4>tmux</h4>
+          <p>Status bar, pane borders, and active window styling</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">Δ</div>
+        <div class="tool-info">
+          <h4>delta</h4>
+          <p>Git diff colors for added, removed, and hunk headers</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">ez</div>
+        <div class="tool-info">
+          <h4>eza</h4>
+          <p>File type, permission, and metadata colors for eza ls</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">fz</div>
+        <div class="tool-info">
+          <h4>fzf</h4>
+          <p>Prompt, pointer, match highlight, and border colors</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">lg</div>
+        <div class="tool-info">
+          <h4>lazygit</h4>
+          <p>Full UI theme for the lazygit TUI git client</p>
+        </div>
+        <span class="tool-badge">Complete</span>
+      </div>
+      <div class="tool-card" style="visibility:hidden;"></div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Install -->
+<section id="install">
+  <div class="wrap">
+    <div class="install-inner">
+      <div class="install-text">
+        <span class="label">Quick start</span>
+        <h2>Up and running in 60 seconds.</h2>
+        <p>Clone the repository and run make install. The Makefile deploys all 24 theme files across all 13 tools in one shot.</p>
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Clone and backup</h4>
+            <p>Snapshot your current config before installing. Backups are stored in <code>backups/</code> and can be restored at any time.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Install all themes</h4>
+            <p>Deploys 24 files to canonical config locations. Respects <code>XDG_CONFIG_HOME</code> or falls back to <code>~/.config</code>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Activate per tool</h4>
+            <p>Install copies the files but doesn't activate them. Follow the post-install table in the README to wire up each tool.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="cb-bar">
+          <span class="cb-dot"></span>
+          <span class="cb-dot"></span>
+          <span class="cb-dot"></span>
+          <span class="cb-title">shell</span>
+        </div>
+        <div class="cb-body">
+          <pre><span class="cb-cmt"># Clone the repository</span>
+<span class="cb-pr">$</span> git clone https://github.com/mamercad/designless
+<span class="cb-pr">$</span> cd designless
+
+<span class="cb-cmt"># Backup existing config, then install</span>
+<span class="cb-pr">$</span> <span class="cb-cmd">make</span> <span class="cb-opt">backup</span>
+<span class="cb-pr">$</span> <span class="cb-cmd">make</span> <span class="cb-opt">install</span>
+
+<span class="cb-cmt"># Or install a single variant</span>
+<span class="cb-pr">$</span> <span class="cb-cmd">make</span> <span class="cb-opt">install-dark</span>
+<span class="cb-pr">$</span> <span class="cb-cmd">make</span> <span class="cb-opt">install-light</span>
+
+<span class="cb-cmt"># Apply env exports for the current shell</span>
+<span class="cb-pr">$</span> <span class="cb-acc">eval</span> <span class="cb-str">"$(make env-dark)"</span>
+
+<span class="cb-cmt"># Restore from backup if needed</span>
+<span class="cb-pr">$</span> <span class="cb-cmd">make</span> <span class="cb-opt">restore</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span class="dot"></span>
+      Designless
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/mamercad/designless">GitHub</a>
+      <a href="../README.md">README</a>
+      <a href="../LICENSE.txt">MIT License</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const root = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  const saved = localStorage.getItem('designless-theme');
+  if (saved === 'light') root.classList.add('light');
+  btn.addEventListener('click', () => {
+    const nowLight = root.classList.toggle('light');
+    localStorage.setItem('designless-theme', nowLight ? 'light' : 'dark');
+  });
+})();
+</script>
+
+</body>
+</html>

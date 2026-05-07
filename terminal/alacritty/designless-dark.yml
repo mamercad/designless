@@ -1,0 +1,28 @@
+colors:
+  primary:
+    background: "#090807"
+    foreground: "#E5DDD0"
+  cursor:
+    text: "#090807"
+    cursor: "#FF4719"
+  selection:
+    text: "#E5DDD0"
+    background: "#1D1A17"
+  normal:
+    black: "#181614"
+    red: "#D71921"
+    green: "#5AB87A"
+    yellow: "#E8A030"
+    blue: "#4A8FD9"
+    magenta: "#9575CD"
+    cyan: "#26C6C6"
+    white: "#E5DDD0"
+  bright:
+    black: "#3A3632"
+    red: "#FF3B3B"
+    green: "#7DD89A"
+    yellow: "#FFB84D"
+    blue: "#70ADEC"
+    magenta: "#B39DDB"
+    cyan: "#4DD9D9"
+    white: "#FFFFFF"

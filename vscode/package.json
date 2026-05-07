@@ -1,0 +1,44 @@
+{
+  "name": "designless-vscode-theme",
+  "displayName": "Designless Theme",
+  "description": "A warm-monochrome VS Code theme with one molten accent color.",
+  "version": "0.0.1",
+  "publisher": "mamercad",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mamercad/designless"
+  },
+  "homepage": "https://github.com/mamercad/designless",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "designless",
+    "monochrome",
+    "warm",
+    "minimal"
+  ],
+  "scripts": {
+    "validate": "node ./scripts/validate-theme.mjs",
+    "package": "npx @vscode/vsce package --baseContentUrl https://github.com/mamercad/designless/blob/main/vscode --baseImagesUrl https://github.com/mamercad/designless/raw/main/vscode"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Designless Light",
+        "uiTheme": "vs",
+        "path": "./themes/designless-light-color-theme.json"
+      },
+      {
+        "label": "Designless Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/designless-dark-color-theme.json"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+[delta "designless-light"]
+    light = true
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    syntax-theme = none
+    plus-style                   = "#E8E4DF" "#1E6B3C"
+    minus-style                  = "#E8E4DF" "#C0000A"
+    zero-style                   = "#FFFFFF" "#111111"
+    plus-emph-style              = "#F0EDE8" "#1E6B3C"
+    minus-emph-style             = "#F0EDE8" "#C0000A"
+    line-numbers-left-style      = "#6B6560"
+    line-numbers-right-style     = "#6B6560"
+    line-numbers-plus-style      = "#1E6B3C"
+    line-numbers-minus-style     = "#C0000A"
+    file-style                   = "#1050A0" bold
+    hunk-header-style            = "#5A2D9A" bold
+    hunk-header-decoration-style = "#E8E4DF"
+    blame-code-style             = "#FFFFFF" "#111111"
+    blame-format-style           = "#6B6560"
+    hyperlinks                   = true

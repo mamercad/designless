@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Designless Light — Terminal Preview</title>
+<style>
+:root {
+  --bg:    #FFFFFF;
+  --surf:  #F4F0EB;
+  --raise: #E8E4DF;
+  --bord:  #DDD7D1;
+  --mute:  #6B6560;
+  --fg:    #111111;
+  --acc:   #FF4719;
+  --red:   #C0000A;
+  --grn:   #1E6B3C;
+  --yel:   #7A4A00;
+  --blu:   #1050A0;
+  --mag:   #5A2D9A;
+  --cyn:   #006E6E;
+  --b-grn: #2A8A50;
+  --b-red: #E8001A;
+  --b-yel: #9A5E00;
+  --b-blu: #1A6ACC;
+  --b-mag: #7A40C0;
+  --b-cyn: #008A8A;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 1400px; height: 880px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 22% 12%, #f0ece6 0%, #e8e4de 65%);
+  font-family: "JetBrains Mono","SF Mono",ui-monospace,Menlo,monospace;
+  color: var(--fg);
+}
+.scene {
+  width: 1400px; height: 880px;
+  display: flex; align-items: center; justify-content: center;
+}
+.window {
+  width: 1320px; height: 840px;
+  border-radius: 12px;
+  border: 1px solid var(--bord);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.08),
+    0 48px 130px rgba(0,0,0,.18),
+    0 8px 32px rgba(0,0,0,.1);
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Title bar ─────────────────────────────────── */
+.tb {
+  height: 40px; flex-shrink: 0;
+  background: #f5f1ec;
+  border-bottom: 1px solid var(--bord);
+  display: flex; align-items: center;
+  padding: 0 16px;
+  position: relative;
+}
+.tb-dots { display: flex; gap: 7px; }
+.tl { width: 12px; height: 12px; border-radius: 50%; }
+.tl.c { background: #FF5F56; }
+.tl.m { background: #FFBD2E; }
+.tl.x { background: #27C93F; }
+.tb-mid {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  font-size: 11.5px; color: var(--mute); letter-spacing: .03em;
+}
+.tb-path { margin-left: auto; font-size: 11px; color: var(--mute); opacity: .7; }
+
+/* ── Pane layout ───────────────────────────────── */
+.panes { flex: 1; display: flex; overflow: hidden; }
+
+/* ── Neovim: left column ───────────────────────── */
+.nvim {
+  flex: 0 0 820px;
+  border-right: 1px solid var(--bord);
+  display: flex; flex-direction: column;
+}
+.nvim-inner { flex: 1; display: flex; overflow: hidden; }
+
+/* NvimTree */
+.tree {
+  flex: 0 0 178px;
+  border-right: 1px solid var(--raise);
+  padding: 7px 0;
+  font-size: 11.5px; line-height: 1.6;
+  overflow: hidden;
+  background: #f9f6f2;
+}
+.tree-hd {
+  font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--mute); padding: 0 10px 5px;
+}
+.ti { padding: 1.5px 0 1.5px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ti.d  { color: var(--blu); }
+.ti.f  { color: var(--fg); opacity: .85; }
+.ti.dm { color: var(--mute); }
+.ti.s  { background: var(--raise); color: var(--fg); font-weight: 600; }
+.ti.i1 { padding-left: 18px; }
+.ti.i2 { padding-left: 28px; }
+.ti.i3 { padding-left: 38px; }
+.ti.i4 { padding-left: 48px; }
+
+/* Gutter + code */
+.code-wrap { flex: 1; display: flex; overflow: hidden; }
+.gut {
+  flex: 0 0 40px;
+  padding: 8px 7px 0 0;
+  text-align: right;
+  font-size: 11.5px; line-height: 1.583;
+  color: var(--mute);
+  border-right: 1px solid var(--raise);
+  user-select: none;
+  overflow: hidden;
+}
+.ln { display: block; height: 19px; }
+.ln.c  { color: var(--fg); }
+.ln.a  { color: var(--grn); }
+.ln.mo { color: var(--yel); }
+.code {
+  flex: 1; overflow: hidden;
+  padding: 8px 12px;
+  font-size: 12px; line-height: 1.583;
+}
+.cl { display: block; height: 19px; white-space: pre; }
+.cl.hl { background: #f0ece6; }
+
+/* Syntax tokens — light variant */
+.kw  { color: var(--mag); font-weight: 600; }
+.fn  { color: var(--cyn); }
+.str { color: var(--grn); }
+.num { color: var(--yel); }
+.cmt { color: var(--mute); font-style: italic; }
+.fld { color: var(--b-mag); }
+.pu  { color: #b0a8a0; }
+.op  { color: var(--fg); opacity: .5; }
+.id  { color: var(--fg); }
+
+/* Vim statusline */
+.vsl {
+  height: 22px; flex-shrink: 0;
+  background: #f5f1ec;
+  border-top: 1px solid var(--bord);
+  display: flex; align-items: center;
+  font-size: 11px;
+}
+.vsl-mode {
+  background: var(--acc); color: #fff;
+  font-weight: 700; font-size: 10px; letter-spacing: .07em;
+  padding: 0 10px; height: 100%;
+  display: flex; align-items: center;
+}
+.vsl-git  { color: var(--blu);  padding: 0 10px; }
+.vsl-file { flex: 1; padding: 0 6px; color: var(--fg); }
+.vsl-mod  { color: var(--red); }
+.vsl-ft   { color: var(--mute); padding: 0 8px; font-size: 10.5px; }
+.vsl-pos  {
+  background: var(--raise); padding: 0 11px; height: 100%;
+  display: flex; align-items: center; color: var(--fg);
+}
+
+/* ── Right column ──────────────────────────────── */
+.rc { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.ph {
+  background: #f5f1ec;
+  border-bottom: 1px solid var(--raise);
+  font-size: 10.5px; color: var(--mute);
+  padding: 3.5px 12px; flex-shrink: 0;
+  letter-spacing: .04em;
+}
+.ph b { color: var(--fg); font-weight: 400; }
+
+/* Delta pane */
+.dp {
+  flex: 0 0 332px;
+  border-bottom: 1px solid var(--bord);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.db { flex: 1; padding: 7px 11px; font-size: 11.5px; line-height: 1.68; overflow: hidden; }
+.dl { display: block; white-space: pre; }
+.d-sha { color: var(--yel); }
+.d-ref { color: var(--acc); }
+.d-msg { color: var(--fg); }
+.d-sep { color: var(--bord); display: block; }
+.d-hd  { color: var(--b-cyn); background: rgba(0,110,110,.05); display: block; }
+.d-add { color: var(--b-grn); }
+.d-del { color: var(--b-red); }
+.d-ctx { color: var(--mute); }
+.d-pr  { color: var(--acc); }
+
+/* Eza pane */
+.ep { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.eb { flex: 1; padding: 7px 11px; font-size: 11.5px; line-height: 1.62; overflow: hidden; }
+.el { display: block; white-space: pre; }
+.e-pm  { color: var(--mute); }
+.e-sz  { color: var(--yel); }
+.e-us  { color: var(--mute); }
+.e-dt  { color: var(--mute); }
+.e-dir { color: var(--blu); font-weight: 600; }
+.e-md  { color: var(--b-cyn); }
+.e-mk  { color: var(--yel); }
+.e-lua { color: var(--b-blu); }
+.e-txt { color: var(--fg); }
+.e-pr  { color: var(--acc); }
+.cur   { display: inline-block; width: 7px; height: 14px; background: var(--acc); transform: translateY(2px); }
+
+/* ── Tmux bar ──────────────────────────────────── */
+.tmux {
+  height: 22px; flex-shrink: 0;
+  background: #f5f1ec;
+  border-top: 1px solid var(--bord);
+  display: flex; align-items: center;
+  font-size: 11px;
+}
+.t-sess {
+  background: var(--acc); color: #fff;
+  font-weight: 700; font-size: 10px; letter-spacing: .05em;
+  padding: 0 12px; height: 100%;
+  display: flex; align-items: center;
+}
+.t-w   { padding: 0 9px; color: var(--mute); }
+.t-w.on { color: var(--fg); }
+.t-sp  { flex: 1; }
+.t-rt  { padding: 0 13px; color: var(--mute); font-size: 10.5px; }
+</style>
+</head>
+<body>
+<div class="scene">
+<div class="window">
+
+  <div class="tb">
+    <div class="tb-dots">
+      <span class="tl c"></span>
+      <span class="tl m"></span>
+      <span class="tl x"></span>
+    </div>
+    <div class="tb-mid">designless  ·  nvim / delta / eza</div>
+    <div class="tb-path">~/Code/GH/mamercad/designless</div>
+  </div>
+
+  <div class="panes">
+
+    <!-- Neovim -->
+    <div class="nvim">
+      <div class="nvim-inner">
+
+        <div class="tree">
+          <div class="tree-hd">Explorer</div>
+          <div class="ti d">▾ designless</div>
+          <div class="ti d i1">▸ assets</div>
+          <div class="ti d i1">▸ colors</div>
+          <div class="ti d i1">▸ delta</div>
+          <div class="ti d i1">▾ neovim</div>
+          <div class="ti d i2">▾ colors</div>
+          <div class="ti dm i3">  designless-dark.lua</div>
+          <div class="ti s i3">  designless-light.lua</div>
+          <div class="ti d i1">▸ terminal</div>
+          <div class="ti d i1">▸ tmux</div>
+          <div class="ti d i1">▸ vim</div>
+          <div class="ti d i1">▸ vscode</div>
+          <div class="ti dm i1">  Makefile</div>
+          <div class="ti dm i1">  README.md</div>
+        </div>
+
+        <div class="code-wrap">
+          <div class="gut">
+<span class="ln">1</span>
+<span class="ln">2</span>
+<span class="ln">3</span>
+<span class="ln">4</span>
+<span class="ln">5</span>
+<span class="ln">6</span>
+<span class="ln">7</span>
+<span class="ln">8</span>
+<span class="ln">9</span>
+<span class="ln">10</span>
+<span class="ln">11</span>
+<span class="ln">12</span>
+<span class="ln">13</span>
+<span class="ln">14</span>
+<span class="ln c">15</span>
+<span class="ln a">16</span>
+<span class="ln a">17</span>
+<span class="ln mo">18</span>
+<span class="ln mo">19</span>
+<span class="ln mo">20</span>
+<span class="ln mo">21</span>
+<span class="ln mo">22</span>
+<span class="ln mo">23</span>
+<span class="ln">24</span>
+<span class="ln">25</span>
+<span class="ln">26</span>
+<span class="ln">27</span>
+<span class="ln">28</span>
+<span class="ln">29</span>
+<span class="ln">30</span>
+<span class="ln">31</span>
+<span class="ln">32</span>
+<span class="ln">33</span>
+<span class="ln">34</span>
+<span class="ln">35</span>
+<span class="ln">36</span>
+<span class="ln">37</span>
+          </div>
+          <div class="code">
+<span class="cl"><span class="fn">vim.cmd</span><span class="pu">(</span><span class="str">"highlight clear"</span><span class="pu">)</span></span>
+<span class="cl"></span>
+<span class="cl"><span class="kw">if</span> <span class="fn">vim.fn.exists</span><span class="pu">(</span><span class="str">"syntax_on"</span><span class="pu">)</span> <span class="op">==</span> <span class="num">1</span> <span class="kw">then</span></span>
+<span class="cl">  <span class="fn">vim.cmd</span><span class="pu">(</span><span class="str">"syntax reset"</span><span class="pu">)</span></span>
+<span class="cl"><span class="kw">end</span></span>
+<span class="cl"></span>
+<span class="cl"><span class="fn">vim.o</span><span class="pu">.</span><span class="fld">background</span> <span class="op">=</span> <span class="str">"light"</span></span>
+<span class="cl"><span class="fn">vim.g</span><span class="pu">.</span><span class="fld">colors_name</span> <span class="op">=</span> <span class="str">"designless-light"</span></span>
+<span class="cl"></span>
+<span class="cl"><span class="kw">local</span> <span class="id">c</span> <span class="op">=</span> <span class="pu">{</span></span>
+<span class="cl">  <span class="fld">bg</span>       <span class="op">=</span> <span class="str">"#FFFFFF"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">surface</span>  <span class="op">=</span> <span class="str">"#F4F0EB"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">raised</span>   <span class="op">=</span> <span class="str">"#E8E4DF"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">muted</span>    <span class="op">=</span> <span class="str">"#6B6560"</span><span class="pu">,</span></span>
+<span class="cl hl">  <span class="fld">fg</span>       <span class="op">=</span> <span class="str">"#111111"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">bright</span>   <span class="op">=</span> <span class="str">"#000000"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">accent</span>   <span class="op">=</span> <span class="str">"#FF4719"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">red</span>      <span class="op">=</span> <span class="str">"#C0000A"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">green</span>    <span class="op">=</span> <span class="str">"#1E6B3C"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">yellow</span>   <span class="op">=</span> <span class="str">"#7A4A00"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">blue</span>     <span class="op">=</span> <span class="str">"#1050A0"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">magenta</span>  <span class="op">=</span> <span class="str">"#5A2D9A"</span><span class="pu">,</span></span>
+<span class="cl">  <span class="fld">cyan</span>     <span class="op">=</span> <span class="str">"#006E6E"</span><span class="pu">,</span></span>
+<span class="cl"><span class="pu">}</span></span>
+<span class="cl"></span>
+<span class="cl"><span class="kw">local</span> <span class="kw">function</span> <span class="fn">hl</span><span class="pu">(</span><span class="id">group</span><span class="pu">,</span> <span class="id">spec</span><span class="pu">)</span></span>
+<span class="cl">  <span class="fn">vim.api.nvim_set_hl</span><span class="pu">(</span><span class="num">0</span><span class="pu">,</span> <span class="id">group</span><span class="pu">,</span> <span class="id">spec</span><span class="pu">)</span></span>
+<span class="cl"><span class="kw">end</span></span>
+<span class="cl"></span>
+<span class="cl"><span class="fn">hl</span><span class="pu">(</span><span class="str">"Normal"</span><span class="pu">,</span>    <span class="pu">{</span> <span class="fld">fg</span> <span class="op">=</span> <span class="id">c</span><span class="pu">.</span><span class="fld">fg</span><span class="pu">,</span>    <span class="fld">bg</span> <span class="op">=</span> <span class="id">c</span><span class="pu">.</span><span class="fld">bg</span> <span class="pu">})</span></span>
+<span class="cl"><span class="fn">hl</span><span class="pu">(</span><span class="str">"Comment"</span><span class="pu">,</span>   <span class="pu">{</span> <span class="fld">fg</span> <span class="op">=</span> <span class="id">c</span><span class="pu">.</span><span class="fld">muted</span><span class="pu">,</span>  <span class="fld">italic</span> <span class="op">=</span> <span class="kw">true</span> <span class="pu">})</span></span>
+<span class="cl"><span class="fn">hl</span><span class="pu">(</span><span class="str">"String"</span><span class="pu">,</span>    <span class="pu">{</span> <span class="fld">fg</span> <span class="op">=</span> <span class="id">c</span><span class="pu">.</span><span class="fld">green</span> <span class="pu">})</span></span>
+<span class="cl"><span class="fn">hl</span><span class="pu">(</span><span class="str">"Number"</span><span class="pu">,</span>    <span class="pu">{</span> <span class="fld">fg</span> <span class="op">=</span> <span class="id">c</span><span class="pu">.</span><span class="fld">yellow</span> <span class="pu">})</span></span>
+<span class="cl"><span class="fn">hl</span><span class="pu">(</span><span class="str">"Keyword"</span><span class="pu">,</span>   <span class="pu">{</span> <span class="fld">fg</span> <span class="op">=</span> <span class="id">c</span><span class="pu">.</span><span class="fld">magenta</span><span class="pu">,</span> <span class="fld">bold</span> <span class="op">=</span> <span class="kw">true</span> <span class="pu">})</span></span>
+<span class="cl"><span class="fn">hl</span><span class="pu">(</span><span class="str">"Function"</span><span class="pu">,</span>  <span class="pu">{</span> <span class="fld">fg</span> <span class="op">=</span> <span class="id">c</span><span class="pu">.</span><span class="fld">cyan</span> <span class="pu">})</span></span>
+<span class="cl"><span class="fn">hl</span><span class="pu">(</span><span class="str">"Type"</span><span class="pu">,</span>      <span class="pu">{</span> <span class="fld">fg</span> <span class="op">=</span> <span class="id">c</span><span class="pu">.</span><span class="fld">blue</span> <span class="pu">})</span></span>
+          </div>
+        </div>
+
+      </div>
+      <div class="vsl">
+        <div class="vsl-mode">NORMAL</div>
+        <div class="vsl-git"> main</div>
+        <div class="vsl-file">  neovim/colors/designless-light.lua <span class="vsl-mod">[+]</span></div>
+        <div class="vsl-ft">lua</div>
+        <div class="vsl-pos">15:10  45%</div>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div class="rc">
+
+      <div class="dp">
+        <div class="ph"><b>git log</b>  ·  delta  ·  neovim/colors/</div>
+        <div class="db">
+<span class="dl"><span class="d-pr">›</span> git log --oneline -5</span>
+<span class="dl"></span>
+<span class="dl"><span class="d-sha">3f2a91c</span> <span class="d-ref">(HEAD → main)</span> <span class="d-msg">feat: add WezTerm dark/light</span></span>
+<span class="dl"><span class="d-sha">8b4d21e</span> <span class="d-msg">feat: add eza dark/light theme.yml</span></span>
+<span class="dl"><span class="d-sha">c1f7e3a</span> <span class="d-msg">fix: correct fzf accent key mapping</span></span>
+<span class="dl"><span class="d-sha">a9e5b12</span> <span class="d-msg">feat: add tmux dark/light configs</span></span>
+<span class="dl"><span class="d-sha">f3c8d01</span> <span class="d-msg">chore: add CONTRIBUTING and linting</span></span>
+<span class="dl"></span>
+<span class="dl"><span class="d-pr">›</span> git diff HEAD~1 -- neovim/</span>
+<span class="dl"></span>
+<span class="dl d-sep">─── neovim/colors/designless-light.lua ─────────</span>
+<span class="dl d-hd">@@ -9,6 +9,8 @@ vim.g.colors_name = "designless-light"</span>
+<span class="dl d-ctx"> local c = {</span>
+<span class="dl d-ctx">   muted   = "#6B6560",</span>
+<span class="dl d-ctx">   fg      = "#111111",</span>
+<span class="dl d-add">+  bright  = "#000000",</span>
+<span class="dl d-add">+  accent  = "#FF4719",</span>
+<span class="dl d-ctx">   red     = "#C0000A",</span>
+<span class="dl d-del">-  green   = "#1D6B3C",</span>
+<span class="dl d-add">+  green   = "#1E6B3C",</span>
+<span class="dl d-ctx"> }</span>
+        </div>
+      </div>
+
+      <div class="ep">
+        <div class="ph"><b>eza -la</b>  ·  ~/Code/GH/mamercad/designless</div>
+        <div class="eb">
+<span class="el"><span class="e-pr">›</span> eza --long --icons --git</span>
+<span class="el"><span class="e-pm">drwxr-xr-x</span>    - <span class="e-us">mark</span>  <span class="e-dt">7 May 14:23</span>  <span class="e-dir"> assets</span></span>
+<span class="el"><span class="e-pm">drwxr-xr-x</span>    - <span class="e-us">mark</span>  <span class="e-dt">7 May 14:23</span>  <span class="e-dir"> colors</span></span>
+<span class="el"><span class="e-pm">drwxr-xr-x</span>    - <span class="e-us">mark</span>  <span class="e-dt">7 May 14:23</span>  <span class="e-dir"> delta</span></span>
+<span class="el"><span class="e-pm">drwxr-xr-x</span>    - <span class="e-us">mark</span>  <span class="e-dt">7 May 14:23</span>  <span class="e-dir"> eza</span></span>
+<span class="el"><span class="e-pm">drwxr-xr-x</span>    - <span class="e-us">mark</span>  <span class="e-dt">7 May 14:23</span>  <span class="e-dir"> neovim</span></span>
+<span class="el"><span class="e-pm">drwxr-xr-x</span>    - <span class="e-us">mark</span>  <span class="e-dt">7 May 14:23</span>  <span class="e-dir"> terminal</span></span>
+<span class="el"><span class="e-pm">drwxr-xr-x</span>    - <span class="e-us">mark</span>  <span class="e-dt">7 May 14:23</span>  <span class="e-dir"> tmux</span></span>
+<span class="el"><span class="e-pm">drwxr-xr-x</span>    - <span class="e-us">mark</span>  <span class="e-dt">7 May 14:23</span>  <span class="e-dir"> vim</span></span>
+<span class="el"><span class="e-pm">drwxr-xr-x</span>    - <span class="e-us">mark</span>  <span class="e-dt">7 May 14:23</span>  <span class="e-dir"> vscode</span></span>
+<span class="el"><span class="e-pm">.rw-r--r--</span> <span class="e-sz">4.2k</span> <span class="e-us">mark</span>  <span class="e-dt">7 May 14:20</span>  <span class="e-md"> CHANGELOG.md</span></span>
+<span class="el"><span class="e-pm">.rw-r--r--</span> <span class="e-sz">2.1k</span> <span class="e-us">mark</span>  <span class="e-dt">7 May 14:20</span>  <span class="e-md"> CONTRIBUTING.md</span></span>
+<span class="el"><span class="e-pm">.rw-r--r--</span> <span class="e-sz">1.1k</span> <span class="e-us">mark</span>  <span class="e-dt">7 May 14:20</span>  <span class="e-txt"> LICENSE.txt</span></span>
+<span class="el"><span class="e-pm">.rw-r--r--</span> <span class="e-sz">3.8k</span> <span class="e-us">mark</span>  <span class="e-dt">7 May 14:20</span>  <span class="e-mk"> Makefile</span></span>
+<span class="el"><span class="e-pm">.rw-r--r--</span> <span class="e-sz">6.2k</span> <span class="e-us">mark</span>  <span class="e-dt">7 May 14:20</span>  <span class="e-md"> README.md</span></span>
+<span class="el"></span>
+<span class="el"><span class="e-pr">›</span> <span class="cur"></span></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tmux">
+    <div class="t-sess">designless</div>
+    <div class="t-w on">1:nvim</div>
+    <div class="t-w">2:shell</div>
+    <div class="t-w">3:git</div>
+    <div class="t-sp"></div>
+    <div class="t-rt"> main  ·  Wed 07 May  14:23</div>
+  </div>
+
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+[delta "designless-dark"]
+    dark = true
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    syntax-theme = none
+    plus-style                   = "#090807" "#5AB87A"
+    minus-style                  = "#090807" "#D71921"
+    zero-style                   = "#090807" "#E5DDD0"
+    plus-emph-style              = "#181614" "#5AB87A"
+    minus-emph-style             = "#181614" "#D71921"
+    line-numbers-left-style      = "#5A5248"
+    line-numbers-right-style     = "#5A5248"
+    line-numbers-plus-style      = "#5AB87A"
+    line-numbers-minus-style     = "#D71921"
+    file-style                   = "#4A8FD9" bold
+    hunk-header-style            = "#9575CD" bold
+    hunk-header-decoration-style = "#3A3632"
+    blame-code-style             = "#090807" "#E5DDD0"
+    blame-format-style           = "#5A5248"
+    hyperlinks                   = true

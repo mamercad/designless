@@ -1,0 +1,49 @@
+{
+  "name": "Designless Dark",
+  "description": "Warm monochrome dark palette with molten accent",
+  "type": "dark",
+  "palette": {
+    "foreground": "#E5DDD0",
+    "background": "#090807",
+    "muted": "#5A5248",
+    "muted-lighter": "#3D3530",
+    "muted-lightest": "#1D1A17",
+    "accent": "#FF4719",
+    "error": "#FF6B5B",
+    "link": "#6FB3F5",
+    "link-hover": "#8BC3F8",
+    "highlight": "#FFB84D",
+    "dark": "#090807"
+  },
+  "semanticTokens": {
+    "comment": "#5A5248",
+    "string": "#7FD8A8",
+    "number": "#FFB84D",
+    "keyword": "#D8A8FF",
+    "type": "#6FB3F5",
+    "function": "#7FD8D8",
+    "variable": "#E5DDD0"
+  },
+  "terminal": {
+    "ansi": {
+      "black": "#181614",
+      "red": "#D71921",
+      "green": "#5AB87A",
+      "yellow": "#E8A030",
+      "blue": "#4A8FD9",
+      "magenta": "#9575CD",
+      "cyan": "#26C6C6",
+      "white": "#E5DDD0"
+    },
+    "bright": {
+      "black": "#3A3632",
+      "red": "#FF3B3B",
+      "green": "#7DD89A",
+      "yellow": "#FFB84D",
+      "blue": "#70ADEC",
+      "magenta": "#B39DDB",
+      "cyan": "#4DD9D9",
+      "white": "#FFFFFF"
+    }
+  }
+}

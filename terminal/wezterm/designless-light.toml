@@ -1,0 +1,12 @@
+[metadata]
+name = "Designless Light"
+
+[colors]
+foreground = "#111111"
+background = "#FFFFFF"
+cursor_bg = "#FF4719"
+cursor_fg = "#FFFFFF"
+selection_bg = "#E8E4DF"
+selection_fg = "#111111"
+ansi = ["#111111", "#C0000A", "#1E6B3C", "#7A4A00", "#1050A0", "#5A2D9A", "#006E6E", "#3A3530"]
+brights = ["#555050", "#E8001A", "#2A8A50", "#9A5E00", "#1A6ACC", "#7A40C0", "#008A8A", "#6B6560"]

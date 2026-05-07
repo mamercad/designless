@@ -1,0 +1,12 @@
+[metadata]
+name = "Designless Dark"
+
+[colors]
+foreground = "#E5DDD0"
+background = "#090807"
+cursor_bg = "#FF4719"
+cursor_fg = "#090807"
+selection_bg = "#1D1A17"
+selection_fg = "#E5DDD0"
+ansi = ["#181614", "#D71921", "#5AB87A", "#E8A030", "#4A8FD9", "#9575CD", "#26C6C6", "#E5DDD0"]
+brights = ["#3A3632", "#FF3B3B", "#7DD89A", "#FFB84D", "#70ADEC", "#B39DDB", "#4DD9D9", "#FFFFFF"]
