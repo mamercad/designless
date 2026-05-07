@@ -754,6 +754,17 @@ footer {
   transition: color .15s;
 }
 .footer-links a:hover { color: var(--fg); }
+.footer-links a.footer-coffee {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.footer-links .footer-coffee-glyph {
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0.88;
+  transform: translateY(-0.5px);
+}
 </style>
 </head>
 <body>
@@ -1631,6 +1642,7 @@ footer {
       <a href="https://github.com/mamercad/designless">GitHub</a>
       <a href="../README.md">README</a>
       <a href="../LICENSE.txt">MIT License</a>
+      <a class="footer-coffee" href="https://buymeacoffee.com/mamercad" target="_blank" rel="noopener noreferrer" aria-label="Buy me a coffee"><span class="footer-coffee-glyph" aria-hidden="true">☕</span>Coffee</a>
     </div>
   </div>
 </footer>
