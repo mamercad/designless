@@ -1,4 +1,4 @@
-SHELL := /bin/zsh
+SHELL := /bin/bash
 
 REPO := $(CURDIR)
 BACKUP_ROOT := $(REPO)/backups
