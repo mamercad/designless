@@ -4,31 +4,30 @@ Fuzzy finder theme for Designless.
 
 ## Installation
 
-Add to your shell rc file (`~/.zshrc`, `~/.bashrc`, etc.):
+`make install` deploys the theme files automatically. To activate, source the file from your shell rc:
 
-```sh
-export FZF_DEFAULT_OPTS="--color=light:designless-light"
-# or: export FZF_DEFAULT_OPTS="--color=dark:designless-dark"
+```bash
+# In ~/.zshrc or ~/.bashrc
+source ~/.config/fzf/designless-dark
+# or: source ~/.config/fzf/designless-light
 ```
 
-Or inline the colors:
+Or use the Designless env exports, which set `FZF_DEFAULT_OPTS_FILE`:
 
-```sh
-export FZF_DEFAULT_OPTS="
-  --color=bg:#FFFFFF,fg:#111111
-  --color=hl:#FF4719
-  # ... (see designless-light / designless-dark for full color set)
-"
+```bash
+eval "$(make env-dark)"
 ```
+
+## Files
+
+- `designless-light` — Light variant color options
+- `designless-dark` — Dark variant color options
 
 ## Colors
 
-Generated from [`../colors/designless-light.json`](../colors/designless-light.json) and [`../colors/designless-dark.json`](../colors/designless-dark.json).
-
-## Status
-
-✅ Complete.
+Derived from [`../colors/designless-light.json`](../colors/designless-light.json) and
+[`../colors/designless-dark.json`](../colors/designless-dark.json).
 
 ---
 
-*Last updated: 2026-05-05*
+*Last updated: 2026-05-07*

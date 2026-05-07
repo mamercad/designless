@@ -1,22 +1,22 @@
 # Terminal Themes
 
-Designless themes for terminal emulators and TUI tools.
+Designless themes for terminal emulators.
 
-## Terminal Emulators
+## Targets
 
-| Target | Status | Location |
-|--------|--------|----------|
-| Ghostty | ✅ Complete | [ghostty/](ghostty/) |
-| iTerm2 | ✅ Complete | [iterm2/](iterm2/) |
-| Kitty | ✅ Complete | [kitty/](kitty/) |
-| WezTerm | ✅ Complete | [wezterm/](wezterm/) |
-| Alacritty | ✅ Complete | [alacritty/](alacritty/) |
+| Target | Location |
+|--------|----------|
+| Ghostty | [ghostty/](ghostty/) |
+| iTerm2 | [iterm2/](iterm2/) |
+| Kitty | [kitty/](kitty/) |
+| WezTerm | [wezterm/](wezterm/) |
+| Alacritty | [alacritty/](alacritty/) |
 
-## Colors
+## ANSI Colors
 
-Each terminal theme uses the ANSI color set from [`../colors/designless-light.json`](../colors/designless-light.json) and [`../colors/designless-dark.json`](../colors/designless-dark.json).
+Each terminal theme uses the 16-color ANSI set from the shared palette.
 
-### Light Variant ANSI Colors
+### Light Variant
 
 | # | Name | Color |
 |---|------|-------|
@@ -37,7 +37,7 @@ Each terminal theme uses the ANSI color set from [`../colors/designless-light.js
 | 14 | Bright Cyan | `#008A8A` |
 | 15 | Bright White | `#6B6560` |
 
-### Dark Variant ANSI Colors
+### Dark Variant
 
 | # | Name | Color |
 |---|------|-------|
@@ -60,4 +60,4 @@ Each terminal theme uses the ANSI color set from [`../colors/designless-light.js
 
 ---
 
-*Last updated: 2026-05-05*
+*Last updated: 2026-05-07*

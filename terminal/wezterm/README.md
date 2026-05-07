@@ -1,26 +1,32 @@
 # WezTerm Theme
 
-WezTerm terminal emulator configuration for Designless.
+WezTerm terminal emulator theme for Designless.
 
 ## Installation
 
-Copy theme files to WezTerm config directory and reference in `~/.config/wezterm/wezterm.lua`:
+`make install` deploys the theme files automatically. To activate, reference the scheme in
+`~/.config/wezterm/wezterm.lua`:
 
 ```lua
+local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
-config.color_scheme = "Designless Light"
--- or: config.color_scheme = "Designless Dark"
+
+config.color_scheme = 'designless-dark'
+-- or: config.color_scheme = 'designless-light'
+
 return config
 ```
 
+## Files
+
+- `designless-light.toml` — Light variant
+- `designless-dark.toml` — Dark variant
+
 ## Colors
 
-Generated from [`../../colors/designless-light.json`](../../colors/designless-light.json) and [`../../colors/designless-dark.json`](../../colors/designless-dark.json).
-
-## Status
-
-✅ Complete.
+Derived from [`../../colors/designless-light.json`](../../colors/designless-light.json) and
+[`../../colors/designless-dark.json`](../../colors/designless-dark.json).
 
 ---
 
-*Last updated: 2026-05-05*
+*Last updated: 2026-05-07*

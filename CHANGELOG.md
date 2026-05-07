@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated documentation to reflect all 13 themes as complete
-- Reorganized architecture.md to show complete project structure
+- Reorganized ARCHITECTURE.md to show complete project structure
 
 ### Fixed
 
@@ -38,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Editors**: Neovim (Lua), Vim (Vimscript)
 - Shared color palette definitions (JSON)
 - Installation guide (README.md)
-- Architecture documentation (docs/architecture.md)
+- Architecture documentation (docs/ARCHITECTURE.md)
 - Target inventory and status (docs/TARGETS.md)
 
 [Unreleased]: https://github.com/mamercad/designless/compare/v0.0.1...HEAD

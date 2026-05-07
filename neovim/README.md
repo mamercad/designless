@@ -7,43 +7,48 @@ Neovim colorscheme implementing the Designless theme in both light and dark vari
 ### Using a Plugin Manager
 
 **lazy.nvim:**
+
 ```lua
 {
   "mamercad/designless",
   lazy = false,
   priority = 1000,
   config = function()
-    vim.cmd.colorscheme "designless-light"
-    -- or vim.cmd.colorscheme "designless-dark"
+    vim.cmd.colorscheme "designless-dark"
+    -- or vim.cmd.colorscheme "designless-light"
   end,
 }
 ```
 
 **packer.nvim:**
+
 ```lua
 use {
   'mamercad/designless',
   config = function()
-    vim.cmd 'colorscheme designless-light'
+    vim.cmd 'colorscheme designless-dark'
   end
 }
 ```
 
-## Usage
+### Manual
 
-After installation, set your colorscheme in `init.lua`:
+Copy the colorscheme files to your Neovim colors directory:
 
-```lua
-vim.cmd.colorscheme "designless-light"
--- or
-vim.cmd.colorscheme "designless-dark"
+```bash
+cp neovim/colors/designless-dark.lua ~/.config/nvim/colors/
+cp neovim/colors/designless-light.lua ~/.config/nvim/colors/
 ```
 
-## Development
+## Usage
 
-The colorscheme is generated from [`../colors/designless-light.json`](../colors/designless-light.json) and [`../colors/designless-dark.json`](../colors/designless-dark.json).
+Set your colorscheme in `init.lua`:
 
-See the parent [docs/architecture.md](../docs/architecture.md) for guidance on extending or modifying the palette.
+```lua
+vim.cmd.colorscheme "designless-dark"
+-- or
+vim.cmd.colorscheme "designless-light"
+```
 
 ## Colors
 
@@ -59,10 +64,13 @@ See the parent [docs/architecture.md](../docs/architecture.md) for guidance on e
 | Type | `#1050A0` | `#6FB3F5` |
 | Function | `#006E6E` | `#7FD8D8` |
 
-## Status
+## Development
 
-✅ Complete.
+The colorscheme is derived from [`../colors/designless-light.json`](../colors/designless-light.json) and
+[`../colors/designless-dark.json`](../colors/designless-dark.json).
+
+See [docs/ARCHITECTURE.md](../docs/ARCHITECTURE.md) for guidance on extending or modifying the palette.
 
 ---
 
-*Last updated: May 5, 2026*
+*Last updated: 2026-05-07*

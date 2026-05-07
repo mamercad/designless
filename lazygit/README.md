@@ -4,7 +4,8 @@ Git UI theme for Designless.
 
 ## Installation
 
-Add to `~/.config/lazygit/config.yml`:
+`make install` deploys the theme files automatically. To activate, merge the theme into
+`~/.config/lazygit/config.yml`. Example (dark variant):
 
 ```yaml
 gui:
@@ -12,24 +13,36 @@ gui:
     activeBorderColor:
       - "#FF4719"
       - bold
-    # ... (see designless-light.yml / designless-dark.yml for full theme definition)
+    inactiveBorderColor:
+      - "#5A5248"
+    optionsTextColor:
+      - "#6FB3F5"
+    selectedLineBgColor:
+      - "#1D1A17"
+    selectedRangeBgColor:
+      - "#1D1A17"
+    cherryPickedCommitBgColor:
+      - "#5A5248"
+    cherryPickedCommitFgColor:
+      - "#FF4719"
+    unstagedChangesColor:
+      - "#FF6B5B"
+    defaultFgColor:
+      - "#E5DDD0"
 ```
 
-Or include a separate theme file:
+See `designless-dark.yml` and `designless-light.yml` for the complete definitions.
 
-```yaml
-gui:
-  theme: "#(cat ~/.config/lazygit/themes/designless-light.yml)"
-```
+## Files
+
+- `designless-light.yml` — Light variant
+- `designless-dark.yml` — Dark variant
 
 ## Colors
 
-Generated from [`../colors/designless-light.json`](../colors/designless-light.json) and [`../colors/designless-dark.json`](../colors/designless-dark.json).
-
-## Status
-
-✅ Complete.
+Derived from [`../colors/designless-light.json`](../colors/designless-light.json) and
+[`../colors/designless-dark.json`](../colors/designless-dark.json).
 
 ---
 
-*Last updated: 2026-05-05*
+*Last updated: 2026-05-07*

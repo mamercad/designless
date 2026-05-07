@@ -4,32 +4,28 @@ GPU-accelerated terminal emulator theme for Designless.
 
 ## Installation
 
-Copy theme files to Ghostty config directory:
+`make install` deploys the theme files automatically. To activate, add to `~/.config/ghostty/config`:
 
-```sh
-cp designless-light ~/.config/ghostty/themes/designless-light
-cp designless-dark ~/.config/ghostty/themes/designless-dark
+```text
+theme = light:designless-light,dark:designless-dark
 ```
 
-Then in `~/.config/ghostty/config`:
+Or to pin a single variant:
 
-```toml
-theme = "light:designless-light,dark:designless-dark"
+```text
+theme = designless-dark
 ```
+
+## Files
+
+- `designless-light` — Light variant
+- `designless-dark` — Dark variant
 
 ## Colors
 
-Generated from [`../../colors/designless-light.json`](../../colors/designless-light.json) and [`../../colors/designless-dark.json`](../../colors/designless-dark.json).
-
-## Included Files
-
-- `designless-light`
-- `designless-dark`
-
-## Status
-
-✅ Complete.
+Derived from [`../../colors/designless-light.json`](../../colors/designless-light.json) and
+[`../../colors/designless-dark.json`](../../colors/designless-dark.json).
 
 ---
 
-*Last updated: 2026-05-05*
+*Last updated: 2026-05-07*

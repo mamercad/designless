@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 222 40" width="222" height="40" role="img" aria-label="Designless">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&amp;display=swap');
+    </style>
+  </defs>
+  <text font-family="'DM Mono','JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="32" font-weight="400" y="30">
+    <tspan fill="#111111">designless</tspan><tspan fill="#FF4719">█</tspan>
+  </text>
+</svg>

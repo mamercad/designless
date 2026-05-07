@@ -6,7 +6,7 @@ Thank you for your interest in contributing to Designless! This guide covers dev
 
 This project follows [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). Commit messages should follow this structure:
 
-```
+```text
 <type>[optional scope]: <description>
 
 [optional body]
@@ -27,7 +27,7 @@ This project follows [Conventional Commits](https://www.conventionalcommits.org/
 
 ### Examples
 
-```
+```text
 feat: add kitty terminal theme
 
 docs: update installation instructions for XDG_CONFIG_HOME
@@ -43,7 +43,7 @@ ci: add GitHub Actions workflows for lint and validation
 
 Scope can indicate which tool or component is affected:
 
-```
+```text
 feat(vscode): add color token definitions
 
 fix(makefile): handle paths with spaces in iterm2 install
@@ -119,7 +119,7 @@ make lint           # Run all linting checks
 
 - Update relevant tool README if adding a new theme
 - Update [docs/TARGETS.md](docs/TARGETS.md) if changing target status
-- Update [docs/architecture.md](docs/architecture.md) if changing project structure
+- Update [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) if changing project structure
 - Update [CHANGELOG.md](CHANGELOG.md) with your changes (in the "Unreleased" section)
 
 ### Color Consistency

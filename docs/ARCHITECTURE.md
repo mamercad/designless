@@ -43,7 +43,7 @@ designless/
 │   └── README.md
 ├── Makefile                   # Installation automation
 ├── docs/
-│   ├── architecture.md        # This file
+│   ├── ARCHITECTURE.md        # This file
 │   └── TARGETS.md             # Complete inventory
 ├── README.md                  # Top-level guide
 └── LICENSE.txt
@@ -153,4 +153,4 @@ Each target may have its own validation script (e.g., `vscode/scripts/validate-t
 
 ---
 
-*Last updated: May 5, 2026*
+*Last updated: 2026-05-07*

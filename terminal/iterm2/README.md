@@ -4,37 +4,31 @@ iTerm2 color preset and dynamic profile for Designless.
 
 ## Installation
 
-### Color Preset
+`make install` deploys the dynamic profile JSON files automatically. iTerm2 picks them up from
+`~/Library/Application Support/iTerm2/DynamicProfiles/` on next launch.
 
-```sh
-cp designless-light.itermcolors ~/.config/iterm2/colors/
-cp designless-dark.itermcolors ~/.config/iterm2/colors/
-```
+To activate, open iTerm2 → **Preferences → Profiles** and select **Designless Dark** or **Designless Light**.
 
-Then in iTerm2: **Preferences → Profiles → Colors → Color Presets → designless-light** (or designless-dark).
+### Manual — Color Preset
 
-### Dynamic Profile
+To import the `.itermcolors` files separately:
 
-```sh
-cp designless-light.json ~/.config/iterm2/DynamicProfiles/
-cp designless-dark.json ~/.config/iterm2/DynamicProfiles/
-```
+1. iTerm2 → **Preferences → Profiles → Colors → Color Presets → Import...**
+2. Select `designless-dark.itermcolors` or `designless-light.itermcolors`
+3. Apply the preset from the **Color Presets** dropdown
+
+## Files
+
+- `designless-light.itermcolors` — Light color preset
+- `designless-dark.itermcolors` — Dark color preset
+- `designless-light.json` — Light dynamic profile
+- `designless-dark.json` — Dark dynamic profile
 
 ## Colors
 
-Generated from [`../../colors/designless-light.json`](../../colors/designless-light.json) and [`../../colors/designless-dark.json`](../../colors/designless-dark.json).
-
-## Included Files
-
-- `designless-light.itermcolors`
-- `designless-dark.itermcolors`
-- `designless-light.json` (Dynamic Profile)
-- `designless-dark.json` (Dynamic Profile)
-
-## Status
-
-✅ Complete.
+Derived from [`../../colors/designless-light.json`](../../colors/designless-light.json) and
+[`../../colors/designless-dark.json`](../../colors/designless-dark.json).
 
 ---
 
-*Last updated: 2026-05-05*
+*Last updated: 2026-05-07*

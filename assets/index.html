@@ -150,11 +150,13 @@ nav {
   display: flex; align-items: center; gap: 40px;
 }
 .nav-logo {
-  font-size: 15px; font-weight: 700; color: var(--fg);
-  text-decoration: none; letter-spacing: .01em;
-  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+  display: flex; align-items: center;
+  line-height: 1;
 }
-.nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--acc); }
+.nav-logo svg { display: block; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.logo-cursor { animation: blink 1.2s step-end infinite; }
 .nav-links { display: flex; gap: 28px; margin-left: auto; }
 .nav-links a {
   font-size: 13.5px; color: var(--mute); text-decoration: none;
@@ -465,6 +467,45 @@ h1 em {
   font-family: "DM Mono", monospace;
 }
 
+/* ── Wallpapers ─────────────────────────────────────────────────── */
+#wallpapers { padding: 100px 0; }
+#wallpapers h2 {
+  font-size: clamp(28px, 3.5vw, 42px); font-weight: 800;
+  letter-spacing: -.025em; color: var(--fg); margin-bottom: 12px;
+}
+#wallpapers > .wrap > p {
+  font-size: 15px; color: var(--mute); margin-bottom: 48px; font-weight: 300;
+}
+.wp-group { margin-bottom: 48px; }
+.wp-group h3 {
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--mute); margin-bottom: 16px; font-family: "DM Mono", monospace;
+}
+.wp-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+}
+.wp-swatch { display: flex; flex-direction: column; gap: 7px; }
+.wp-tile {
+  width: 100%; aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.06);
+  transition: transform .15s, box-shadow .15s;
+  cursor: default;
+}
+html.light .wp-tile { border-color: rgba(0,0,0,.08); }
+.wp-tile:hover { transform: scale(1.04); box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+.wp-name {
+  font-size: 10px; color: var(--mute); text-align: center;
+  font-family: "DM Mono", monospace; letter-spacing: .02em;
+}
+.wp-dl {
+  display: block; font-size: 10px; color: var(--acc); text-align: center;
+  text-decoration: none; opacity: 0; transition: opacity .15s;
+}
+.wp-swatch:hover .wp-dl { opacity: 1; }
+
 /* ── Coverage ──────────────────────────────────────────────────── */
 #coverage {
   padding: 100px 0;
@@ -581,6 +622,9 @@ h1 em {
 .cb-acc  { color: var(--acc); }
 .cb-str  { color: var(--cyn); }
 .cb-pr   { color: var(--acc); user-select: none; }
+.cb-ok   { color: var(--grn); }
+.code-stack { display: flex; flex-direction: column; gap: 12px; }
+.code-stack .cb-body { padding: 20px 24px; max-height: 320px; overflow-y: auto; }
 
 /* ── Theme toggle ──────────────────────────────────────────────── */
 .theme-toggle {
@@ -611,10 +655,10 @@ footer {
   max-width: 1200px; margin: 0 auto; padding: 0 48px;
 }
 .footer-logo {
-  font-size: 14px; font-weight: 700; color: var(--fg);
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center;
+  line-height: 1;
 }
-.footer-logo .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acc); }
+.footer-logo svg { display: block; }
 .footer-links {
   margin-left: auto; display: flex; gap: 24px;
 }
@@ -631,15 +675,31 @@ footer {
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="#">
-      <span class="dot"></span>
-      Designless
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 138 26" height="26" aria-label="Designless">
+        <text font-family="'DM Mono','JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="20" font-weight="500" y="20">
+          <tspan fill="var(--fg)">designless</tspan><tspan class="logo-cursor" fill="#FF4719">█</tspan>
+        </text>
+      </svg>
     </a>
     <div class="nav-links">
       <a href="#variants">Variants</a>
       <a href="#palette">Palette</a>
+      <a href="#wallpapers">Wallpapers</a>
       <a href="#coverage">Coverage</a>
       <a href="#install">Install</a>
     </div>
+    <a class="theme-toggle" href="https://github.com/mamercad/designless" target="_blank" rel="noopener" aria-label="GitHub repository">
+      <svg viewBox="0 0 16 16" fill="currentColor" width="15" height="15">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+          0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+          -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+          .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+          -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27
+          c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+          .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+          0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+    </a>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
       <!-- Sun: shown in light mode, click to go dark -->
       <svg class="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
@@ -1056,6 +1116,189 @@ footer {
 
 <div class="section-divider"></div>
 
+<!-- Wallpapers -->
+<section id="wallpapers">
+  <div class="wrap">
+    <span class="label">Wallpapers</span>
+    <h2>Solid-color desktop backgrounds.</h2>
+    <p>16 ANSI colors × 8 resolutions × 2 variants — 256 wallpapers, ready to use.</p>
+
+    <div class="wp-group">
+      <h3>Dark variant</h3>
+      <div class="wp-grid">
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#181614"></div>
+          <div class="wp-name">black</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/black-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#D71921"></div>
+          <div class="wp-name">red</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/red-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#5AB87A"></div>
+          <div class="wp-name">green</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/green-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#E8A030"></div>
+          <div class="wp-name">yellow</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/yellow-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#4A8FD9"></div>
+          <div class="wp-name">blue</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/blue-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#9575CD"></div>
+          <div class="wp-name">magenta</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/magenta-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#26C6C6"></div>
+          <div class="wp-name">cyan</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/cyan-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#E5DDD0;"></div>
+          <div class="wp-name">white</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/white-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#3A3632"></div>
+          <div class="wp-name">br-black</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/br_black-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#FF3B3B"></div>
+          <div class="wp-name">br-red</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/br_red-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#7DD89A"></div>
+          <div class="wp-name">br-green</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/br_green-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#FFB84D"></div>
+          <div class="wp-name">br-yellow</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/br_yellow-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#70ADEC"></div>
+          <div class="wp-name">br-blue</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/br_blue-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#B39DDB"></div>
+          <div class="wp-name">br-magenta</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/br_magenta-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#4DD9D9"></div>
+          <div class="wp-name">br-cyan</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/br_cyan-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#FFFFFF"></div>
+          <div class="wp-name">br-white</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/dark/br_white-1920x1080.png" download>↓ 1080p</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wp-group">
+      <h3>Light variant</h3>
+      <div class="wp-grid">
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#111111"></div>
+          <div class="wp-name">black</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/black-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#C0000A"></div>
+          <div class="wp-name">red</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/red-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#1E6B3C"></div>
+          <div class="wp-name">green</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/green-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#7A4A00"></div>
+          <div class="wp-name">yellow</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/yellow-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#1050A0"></div>
+          <div class="wp-name">blue</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/blue-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#5A2D9A"></div>
+          <div class="wp-name">magenta</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/magenta-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#006E6E"></div>
+          <div class="wp-name">cyan</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/cyan-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#3A3530"></div>
+          <div class="wp-name">white</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/white-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#555050"></div>
+          <div class="wp-name">br-black</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/br_black-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#E8001A"></div>
+          <div class="wp-name">br-red</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/br_red-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#2A8A50"></div>
+          <div class="wp-name">br-green</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/br_green-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#9A5E00"></div>
+          <div class="wp-name">br-yellow</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/br_yellow-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#1A6ACC"></div>
+          <div class="wp-name">br-blue</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/br_blue-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#7A40C0"></div>
+          <div class="wp-name">br-magenta</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/br_magenta-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#008A8A"></div>
+          <div class="wp-name">br-cyan</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/br_cyan-1920x1080.png" download>↓ 1080p</a>
+        </div>
+        <div class="wp-swatch">
+          <div class="wp-tile" style="background:#6B6560"></div>
+          <div class="wp-name">br-white</div>
+          <a class="wp-dl" href="https://raw.githubusercontent.com/mamercad/designless/main/wallpapers/solid/light/br_white-1920x1080.png" download>↓ 1080p</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <!-- Coverage -->
 <section id="coverage">
   <div class="wrap">
@@ -1219,15 +1462,16 @@ footer {
         </div>
       </div>
 
-      <div class="code-block">
-        <div class="cb-bar">
-          <span class="cb-dot"></span>
-          <span class="cb-dot"></span>
-          <span class="cb-dot"></span>
-          <span class="cb-title">shell</span>
-        </div>
-        <div class="cb-body">
-          <pre><span class="cb-cmt"># Clone the repository</span>
+      <div class="code-stack">
+        <div class="code-block">
+          <div class="cb-bar">
+            <span class="cb-dot"></span>
+            <span class="cb-dot"></span>
+            <span class="cb-dot"></span>
+            <span class="cb-title">shell</span>
+          </div>
+          <div class="cb-body">
+            <pre><span class="cb-cmt"># Clone the repository</span>
 <span class="cb-pr">$</span> git clone https://github.com/mamercad/designless
 <span class="cb-pr">$</span> cd designless
 
@@ -1244,6 +1488,43 @@ footer {
 
 <span class="cb-cmt"># Restore from backup if needed</span>
 <span class="cb-pr">$</span> <span class="cb-cmd">make</span> <span class="cb-opt">restore</span></pre>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="cb-bar">
+            <span class="cb-dot"></span>
+            <span class="cb-dot"></span>
+            <span class="cb-dot"></span>
+            <span class="cb-title">make install — output</span>
+          </div>
+          <div class="cb-body">
+            <pre>Installing theme files...
+  <span class="cb-ok">installed:</span> ~/.config/ghostty/themes/designless-light
+  <span class="cb-ok">installed:</span> ~/.config/ghostty/themes/designless-dark
+  <span class="cb-ok">installed:</span> ~/.config/kitty/colors/designless-light.conf
+  <span class="cb-ok">installed:</span> ~/.config/kitty/colors/designless-dark.conf
+  <span class="cb-ok">installed:</span> ~/.config/alacritty/colors/designless-light.yml
+  <span class="cb-ok">installed:</span> ~/.config/alacritty/colors/designless-dark.yml
+  <span class="cb-ok">installed:</span> ~/.config/wezterm/colors/designless-light.toml
+  <span class="cb-ok">installed:</span> ~/.config/wezterm/colors/designless-dark.toml
+  <span class="cb-ok">installed:</span> ~/.config/delta/themes/designless-light.gitconfig
+  <span class="cb-ok">installed:</span> ~/.config/delta/themes/designless-dark.gitconfig
+  <span class="cb-ok">installed:</span> ~/.config/eza/light/theme.yml
+  <span class="cb-ok">installed:</span> ~/.config/eza/dark/theme.yml
+  <span class="cb-ok">installed:</span> ~/.config/fzf/designless-light
+  <span class="cb-ok">installed:</span> ~/.config/fzf/designless-dark
+  <span class="cb-ok">installed:</span> ~/.config/lazygit/themes/designless-light.yml
+  <span class="cb-ok">installed:</span> ~/.config/lazygit/themes/designless-dark.yml
+  <span class="cb-ok">installed:</span> ~/.config/tmux/designless-light.conf
+  <span class="cb-ok">installed:</span> ~/.config/tmux/designless-dark.conf
+  <span class="cb-ok">installed:</span> ~/.config/nvim/colors/designless-light.lua
+  <span class="cb-ok">installed:</span> ~/.config/nvim/colors/designless-dark.lua
+  <span class="cb-ok">installed:</span> ~/.vim/colors/designless-light.vim
+  <span class="cb-ok">installed:</span> ~/.vim/colors/designless-dark.vim
+  <span class="cb-ok">installed:</span> ~/Library/Application Support/iTerm2/DynamicProfiles/designless-light.json
+  <span class="cb-ok">installed:</span> ~/Library/Application Support/iTerm2/DynamicProfiles/designless-dark.json
+<span class="cb-ok">Install complete.</span></pre>
+          </div>
         </div>
       </div>
     </div>
@@ -1253,8 +1534,11 @@ footer {
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <span class="dot"></span>
-      Designless
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97 17" height="17" aria-label="Designless">
+        <text font-family="'DM Mono','JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="14" font-weight="400" y="13">
+          <tspan fill="var(--fg)">designless</tspan><tspan class="logo-cursor" fill="#FF4719">█</tspan>
+        </text>
+      </svg>
     </div>
     <div class="footer-links">
       <a href="https://github.com/mamercad/designless">GitHub</a>

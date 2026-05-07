@@ -1,33 +1,36 @@
 # eza Theme
 
-LS replacement theme for Designless.
+ls replacement theme for Designless.
 
 ## Installation
 
-Copy theme file to eza config:
+`make install` deploys the theme files automatically. To activate, set `EZA_CONFIG_DIR` in your shell rc:
 
-```sh
-mkdir -p ~/.config/eza/light ~/.config/eza/dark
-cp designless-light/theme.yml ~/.config/eza/light/
-cp designless-dark/theme.yml ~/.config/eza/dark/
-```
-
-Then switch via environment variable:
-
-```sh
-# In ~/.zshrc or ~/.bashrc
+```bash
+# Light variant
 export EZA_CONFIG_DIR=~/.config/eza/light
-# or: export EZA_CONFIG_DIR=~/.config/eza/dark
+
+# Dark variant
+export EZA_CONFIG_DIR=~/.config/eza/dark
 ```
+
+Or use the Designless env exports:
+
+```bash
+eval "$(make env-light)"
+# EZA_CONFIG_DIR is included automatically
+```
+
+## Files
+
+- `light/theme.yml` — Light variant
+- `dark/theme.yml` — Dark variant
 
 ## Colors
 
-Generated from [`../colors/designless-light.json`](../colors/designless-light.json) and [`../colors/designless-dark.json`](../colors/designless-dark.json).
-
-## Status
-
-✅ Complete.
+Derived from [`../colors/designless-light.json`](../colors/designless-light.json) and
+[`../colors/designless-dark.json`](../colors/designless-dark.json).
 
 ---
 
-*Last updated: 2026-05-05*
+*Last updated: 2026-05-07*

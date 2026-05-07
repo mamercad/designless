@@ -1,65 +1,64 @@
 # Designless — Quick Reference
 
-## What You "Skin"
+## What You Get
 
-All 13 themeable tools in your workstation, now with Designless directory stubs:
+All 13 themeable tools in your terminal workstation, covered in both light and dark variants:
 
 ### Terminal Emulators (5 targets)
-- **Ghostty** — ✅ Complete
-- **iTerm2** — ✅ Complete
-- **Kitty** — ✅ Complete
-- **WezTerm** — ✅ Complete
-- **Alacritty** — ✅ Complete
+
+- **Ghostty** — complete
+- **iTerm2** — complete
+- **Kitty** — complete
+- **WezTerm** — complete
+- **Alacritty** — complete
 
 ### Terminal Multiplexers & Tools (5 targets)
-- **tmux** — ✅ Complete
-- **delta** (git diff) — ✅ Complete
-- **eza** (ls replacement) — ✅ Complete
-- **lazygit** (git UI) — ✅ Complete
-- **fzf** (fuzzy finder) — ✅ Complete
+
+- **tmux** — complete
+- **delta** (git diff) — complete
+- **eza** (ls replacement) — complete
+- **lazygit** (git UI) — complete
+- **fzf** (fuzzy finder) — complete
 
 ### Editors (3 targets)
-- **VS Code** — ✅ Complete & packaged
-- **Neovim** — ✅ Complete
-- **Vim** — ✅ Complete
+
+- **VS Code** — complete and packaged as `.vsix`
+- **Neovim** — complete
+- **Vim** — complete
 
 ---
 
 ## Repository Layout
 
-```
+```text
 designless/
 ├── colors/                 # Shared palette (source of truth)
 │   ├── designless-light.json
 │   └── designless-dark.json
-├── vscode/                 # ✅ VS Code extension
+├── vscode/                 # VS Code extension
 ├── terminal/               # Terminal emulators
-│   ├── ghostty/            # ✅
-│   ├── iterm2/             # ✅
-│   ├── kitty/              # ✅
-│   ├── wezterm/            # ✅
-│   └── alacritty/          # ✅
-├── tmux/                   # ✅ Terminal multiplexer
-├── delta/                  # ✅ Git diff
-├── eza/                    # ✅ ls replacement
-├── fzf/                    # ✅ Fuzzy finder
-├── lazygit/                # ✅ Git UI
-├── neovim/                 # ✅ Neovim
-├── vim/                    # ✅ Vim
+│   ├── ghostty/
+│   ├── iterm2/
+│   ├── kitty/
+│   ├── wezterm/
+│   └── alacritty/
+├── tmux/                   # Terminal multiplexer
+├── delta/                  # Git diff viewer
+├── eza/                    # ls replacement
+├── fzf/                    # Fuzzy finder
+├── lazygit/                # Git UI
+├── neovim/                 # Neovim colorscheme
+├── vim/                    # Vim colorscheme
 └── docs/
-    ├── architecture.md     # Multi-target design guide
-    └── TARGETS.md          # Complete inventory & status
+    ├── ARCHITECTURE.md     # Multi-target design guide
+    └── TARGETS.md          # Complete inventory and status
 ```
 
 ---
 
-## How to Use
+## Installation
 
-### Installation
-
-All 13 themes are complete. See [README.md](README.md) for full installation and configuration instructions using `make`.
-
-### Deployment
+All 13 themes are complete. See [README.md](README.md) for full installation instructions.
 
 ```bash
 cd /path/to/designless
@@ -67,24 +66,27 @@ make backup      # Snapshot existing config
 make install     # Deploy all 24 Designless theme files
 ```
 
-See `make env-light` or `make env-dark` to print shell environment exports for each variant.
+To install only one variant:
 
-### Per-Tool Configuration
+```bash
+make install-light
+make install-dark
+```
 
-After installation, configure each tool to use the Designless theme. See [README.md](README.md) **Post-Installation Setup** table for per-tool activation steps.
+To apply shell environment exports for the active variant:
 
----
-
-## Next Steps
-
-1. **Implement tmux** — Terminal multiplexer theme
-2. **Implement delta** — Git diff colors
-3. **Implement eza** — ls replacement theme
-4. **Implement lazygit/fzf** — Shell workflow polish
-5. **Implement Neovim** — Editor colorscheme
-
-See [docs/TARGETS.md](docs/TARGETS.md) for full development priorities and automation roadmap.
+```bash
+eval "$(make env-light)"
+# or
+eval "$(make env-dark)"
+```
 
 ---
 
-*Last updated: 2026-05-05*
+## Per-Tool Activation
+
+`make install` copies theme files but does not activate them. See the [README.md](README.md) Post-Installation Setup table for per-tool activation steps.
+
+---
+
+*Last updated: 2026-05-07*

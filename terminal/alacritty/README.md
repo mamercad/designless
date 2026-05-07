@@ -1,29 +1,28 @@
 # Alacritty Theme
 
-Alacritty terminal emulator configuration for Designless.
+Alacritty terminal emulator theme for Designless.
 
 ## Installation
 
-```sh
-cp designless-light.yml ~/.config/alacritty/colors/
-cp designless-dark.yml ~/.config/alacritty/colors/
-```
-
-Then in `~/.config/alacritty/alacritty.toml`:
+`make install` deploys the theme files automatically. To activate, add an import to
+`~/.config/alacritty/alacritty.toml`:
 
 ```toml
-colors = "designless-light"
-# or: colors = "designless-dark"
+[general]
+import = ["~/.config/alacritty/colors/designless-dark.yml"]
+# or: import = ["~/.config/alacritty/colors/designless-light.yml"]
 ```
+
+## Files
+
+- `designless-light.yml` — Light variant
+- `designless-dark.yml` — Dark variant
 
 ## Colors
 
-Generated from [`../../colors/designless-light.json`](../../colors/designless-light.json) and [`../../colors/designless-dark.json`](../../colors/designless-dark.json).
-
-## Status
-
-✅ Complete.
+Derived from [`../../colors/designless-light.json`](../../colors/designless-light.json) and
+[`../../colors/designless-dark.json`](../../colors/designless-dark.json).
 
 ---
 
-*Last updated: 2026-05-05*
+*Last updated: 2026-05-07*

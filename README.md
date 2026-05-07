@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark-xl.svg">
+  <img src="assets/logo-light-xl.svg" alt="Designless" width="420">
+</picture>
+
 # Designless Theme
 
 Designless is a warm-monochrome design system for building cohesive themes across multiple platforms: VS Code, terminal emulators (Ghostty, iTerm, Kitty), editors (Vim, Neovim), and more.
@@ -141,7 +146,7 @@ Backups are stored in `backups/YYYYMMDD-HHMMSS/` and are git-ignored.
 
 ### Adding a New Target
 
-See [docs/architecture.md](docs/architecture.md) for guidance on building new theme targets using the shared color definitions in `colors/`.
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for guidance on building new theme targets using the shared color definitions in `colors/`.
 
 ## Color Definitions
 

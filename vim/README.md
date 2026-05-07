@@ -7,30 +7,35 @@ Vim colorscheme implementing the Designless theme in both light and dark variant
 ### Using a Plugin Manager
 
 **vim-plug:**
+
 ```vim
 Plug 'mamercad/designless'
 ```
 
 **pathogen:**
-```sh
+
+```bash
 cd ~/.vim/bundle && git clone https://github.com/mamercad/designless.git
+```
+
+### Manual
+
+Copy the colorscheme files to your Vim colors directory:
+
+```bash
+cp vim/colors/designless-dark.vim ~/.vim/colors/
+cp vim/colors/designless-light.vim ~/.vim/colors/
 ```
 
 ## Usage
 
-After installation, set your colorscheme in `~/.vimrc`:
+Set your colorscheme in `~/.vimrc`:
 
 ```vim
-colorscheme designless-light
-" or
 colorscheme designless-dark
+" or
+colorscheme designless-light
 ```
-
-## Development
-
-The colorscheme is generated from [`../colors/designless-light.json`](../colors/designless-light.json) and [`../colors/designless-dark.json`](../colors/designless-dark.json).
-
-See the parent [docs/architecture.md](../docs/architecture.md) for guidance on extending or modifying the palette.
 
 ## Colors
 
@@ -46,10 +51,13 @@ See the parent [docs/architecture.md](../docs/architecture.md) for guidance on e
 | Type | `#1050A0` | `#6FB3F5` |
 | Function | `#006E6E` | `#7FD8D8` |
 
-## Status
+## Development
 
-✅ Complete.
+The colorscheme is derived from [`../colors/designless-light.json`](../colors/designless-light.json) and
+[`../colors/designless-dark.json`](../colors/designless-dark.json).
+
+See [docs/ARCHITECTURE.md](../docs/ARCHITECTURE.md) for guidance on extending or modifying the palette.
 
 ---
 
-*Last updated: 2026-05-05*
+*Last updated: 2026-05-07*

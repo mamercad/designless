@@ -4,26 +4,23 @@ Kitty terminal emulator theme for Designless.
 
 ## Installation
 
-```sh
-cp designless-light.conf ~/.config/kitty/colors/
-cp designless-dark.conf ~/.config/kitty/colors/
+`make install` deploys the theme files automatically. To activate, add to `~/.config/kitty/kitty.conf`:
+
+```text
+include colors/designless-dark.conf
+# or: include colors/designless-light.conf
 ```
 
-Then in `~/.config/kitty/kitty.conf`:
+## Files
 
-```
-include colors/designless-light.conf
-# or: include colors/designless-dark.conf
-```
+- `designless-light.conf` — Light variant
+- `designless-dark.conf` — Dark variant
 
 ## Colors
 
-Generated from [`../../colors/designless-light.json`](../../colors/designless-light.json) and [`../../colors/designless-dark.json`](../../colors/designless-dark.json).
-
-## Status
-
-✅ Complete.
+Derived from [`../../colors/designless-light.json`](../../colors/designless-light.json) and
+[`../../colors/designless-dark.json`](../../colors/designless-dark.json).
 
 ---
 
-*Last updated: 2026-05-05*
+*Last updated: 2026-05-07*
