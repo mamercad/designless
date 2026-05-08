@@ -1,3 +1,4 @@
+<!-- markdownlint-disable-file MD041 -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark-xl.svg">
   <img src="assets/logo-light-xl.svg" alt="Designless" width="420">
