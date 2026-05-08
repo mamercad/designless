@@ -4,3 +4,6 @@ backups/
 
 # macOS folder metadata (never commit)
 .DS_Store
+
+# Cursor continual-learning hook state (local only)
+.cursor/hooks/state/continual-learning*.json

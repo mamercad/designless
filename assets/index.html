@@ -716,7 +716,7 @@ html.light .slack-main { border-left-color: rgba(0,0,0,.06); }
 .cb-pr   { color: var(--acc); user-select: none; }
 .cb-ok   { color: var(--grn); }
 .code-stack { display: flex; flex-direction: column; gap: 12px; }
-.code-stack .cb-body { padding: 20px 24px; max-height: 320px; overflow-y: auto; }
+.code-stack .cb-body { padding: 20px 24px; }
 
 /* ── Theme toggle ──────────────────────────────────────────────── */
 .theme-toggle {
@@ -778,11 +778,12 @@ footer {
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="#">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 26" height="26" aria-label="Designless">
-        <text font-family="'Inter',system-ui,-apple-system,sans-serif" font-size="20" font-weight="500" y="20">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 26" height="26" aria-label="Designless">
+        <!-- end anchor: word's right edge at x so cursor never overlaps glyph boxes -->
+        <text font-family="'Inter',system-ui,-apple-system,sans-serif" font-size="20" font-weight="500" y="20" text-anchor="end" x="122">
           <tspan fill="var(--fg)">designless</tspan>
         </text>
-        <g class="logo-cursor-group" transform="translate(98,0)">
+        <g class="logo-cursor-group" transform="translate(126,0)">
           <rect class="logo-cursor-block" x="0" y="3" width="11" height="18" rx="1" fill="#FF4719"/>
         </g>
       </svg>
@@ -1640,11 +1641,11 @@ footer {
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 17" height="17" aria-label="Designless">
-        <text font-family="'Inter',system-ui,-apple-system,sans-serif" font-size="14" font-weight="400" y="13">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 17" height="17" aria-label="Designless">
+        <text font-family="'Inter',system-ui,-apple-system,sans-serif" font-size="14" font-weight="400" y="13" text-anchor="end" x="84">
           <tspan fill="var(--fg)">designless</tspan>
         </text>
-        <g class="logo-cursor-group" transform="translate(70,0)">
+        <g class="logo-cursor-group" transform="translate(88,0)">
           <rect class="logo-cursor-block" x="0" y="2" width="8" height="13" rx="1" fill="#FF4719"/>
         </g>
       </svg>
