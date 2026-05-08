@@ -15,7 +15,7 @@ From this directory:
 
 ### From GitHub Releases
 
-Each [semver tag](https://github.com/mamercad/designless/tags) matches `vscode/package.json`, triggers CI, and publishes **`designless-vscode-theme-<version>.vsix`** (for example `designless-vscode-theme-1.0.0.vsix`) on the corresponding GitHub Release. Download the `.vsix` from the release assets, then follow **From VS Code UI** below.
+Each [semver tag](https://github.com/mamercad/designless/tags) matches `vscode/package.json`, triggers CI, and publishes **`designless-vscode-theme-<version>.vsix`** (for example `designless-vscode-theme-1.1.0.vsix`) on the corresponding GitHub Release. Download the `.vsix` from the release assets, then follow **From VS Code UI** below.
 
 ### From VS Code UI
 1. Open Extensions (Cmd+Shift+X)
@@ -26,7 +26,7 @@ Each [semver tag](https://github.com/mamercad/designless/tags) matches `vscode/p
 
 ### From Command Line
 ```sh
-code --install-extension designless-vscode-theme-1.0.0.vsix
+code --install-extension designless-vscode-theme-1.1.0.vsix
 ```
 
 ## Principles

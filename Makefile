@@ -36,7 +36,7 @@ MAPS := \
 	vim/colors/designless-light.vim%$(HOME)/.vim/colors/designless-light.vim \
 	vim/colors/designless-dark.vim%$(HOME)/.vim/colors/designless-dark.vim
 
-.PHONY: backup install install-light install-dark restore env-light env-dark lint lint-md lint-yaml lint-json
+.PHONY: backup install install-light install-dark restore env-light env-dark lint lint-md lint-yaml lint-json wallpapers-solid-logo
 
 backup:
 	@mkdir -p "$(BACKUP_DIR)"
@@ -193,3 +193,7 @@ lint-json:
 		fi; \
 	done
 	@echo "✓ JSON validation passed"
+
+# Regenerate wallpapers/solid-logo/* from wallpapers/solid/* + assets/logo-*-xl.svg (requires Pillow + rsvg-convert).
+wallpapers-solid-logo:
+	@python3 "$(REPO)/wallpapers/scripts/generate_solid_logo_wallpapers.py"

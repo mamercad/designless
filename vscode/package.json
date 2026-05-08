@@ -2,7 +2,7 @@
   "name": "designless-vscode-theme",
   "displayName": "Designless Theme",
   "description": "A warm-monochrome VS Code theme with one molten accent color.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "mamercad",
   "license": "MIT",
   "repository": {
