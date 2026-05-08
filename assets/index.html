@@ -155,8 +155,13 @@ nav {
   line-height: 1;
 }
 .nav-logo svg { display: block; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.logo-cursor-group { animation: blink 1.2s step-end infinite; }
+@keyframes logo-cursor-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.18; }
+}
+.logo-cursor-group {
+  animation: logo-cursor-pulse 2.75s ease-in-out infinite;
+}
 .nav-links { display: flex; gap: 28px; margin-left: auto; }
 .nav-links a {
   font-size: 13.5px; color: var(--mute); text-decoration: none;
@@ -773,13 +778,12 @@ footer {
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="#">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 26" height="26" aria-label="Designless">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 26" height="26" aria-label="Designless">
         <text font-family="'Inter',system-ui,-apple-system,sans-serif" font-size="20" font-weight="500" y="20">
           <tspan fill="var(--fg)">designless</tspan>
         </text>
         <g class="logo-cursor-group" transform="translate(98,0)">
-          <rect class="logo-cursor-block" x="0" y="3" width="28" height="18" rx="1" fill="#FF4719"/>
-          <text x="14" y="20" font-family="'Inter',system-ui,-apple-system,sans-serif" font-size="6" font-weight="500" text-anchor="middle" fill="var(--fg)">.cloud</text>
+          <rect class="logo-cursor-block" x="0" y="3" width="11" height="18" rx="1" fill="#FF4719"/>
         </g>
       </svg>
     </a>
@@ -1636,13 +1640,12 @@ footer {
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 17" height="17" aria-label="Designless">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 17" height="17" aria-label="Designless">
         <text font-family="'Inter',system-ui,-apple-system,sans-serif" font-size="14" font-weight="400" y="13">
           <tspan fill="var(--fg)">designless</tspan>
         </text>
         <g class="logo-cursor-group" transform="translate(70,0)">
-          <rect class="logo-cursor-block" x="0" y="2" width="28" height="13" rx="1" fill="#FF4719"/>
-          <text x="14" y="13" font-family="'Inter',system-ui,-apple-system,sans-serif" font-size="5" font-weight="400" text-anchor="middle" fill="var(--fg)">.cloud</text>
+          <rect class="logo-cursor-block" x="0" y="2" width="8" height="13" rx="1" fill="#FF4719"/>
         </g>
       </svg>
     </div>
