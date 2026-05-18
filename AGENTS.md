@@ -1,3 +1,5 @@
+# AGENTS Notes
+
 ## Learned User Preferences
 
 ## Learned Workspace Facts

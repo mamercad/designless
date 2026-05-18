@@ -6,7 +6,7 @@
 
 # Designless Theme
 
-Designless is a warm-monochrome design system for building cohesive themes across multiple platforms: VS Code, terminal emulators (Ghostty, iTerm, Kitty), editors (Vim, Neovim), Slack sidebar themes, and more.
+Designless is a warm-monochrome design system for building cohesive themes across multiple platforms: VS Code, terminal emulators (Ghostty, iTerm, Kitty), editors (Vim, Neovim), Slack sidebar themes, Hermes Agent CLI skins, and more.
 
 ## Design Principles
 
@@ -37,6 +37,8 @@ Designless is a warm-monochrome design system for building cohesive themes acros
 | Vim | ✅ Complete | [vim/](vim/) |
 | **Apps** | | |
 | Slack | ✅ Complete | [slack/](slack/) (manual paste; not deployed by `make install`) |
+| **Hermes Agent CLI** | | |
+| Hermes Agent skins | ✅ Complete | [hermes/](hermes/) |
 
 ## Terminal Screenshots
 

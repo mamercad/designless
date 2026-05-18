@@ -1,0 +1,91 @@
+name: designless-light
+description: Designless Light — warm monochrome CLI skin for bright terminals with molten orange focus states
+
+colors:
+  banner_border: "#DDD7D1"
+  banner_title: "#111111"
+  banner_accent: "#FF4719"
+  banner_dim: "#6B6560"
+  banner_text: "#111111"
+  ui_accent: "#FF4719"
+  ui_label: "#1050A0"
+  ui_ok: "#1E6B3C"
+  ui_error: "#C0000A"
+  ui_warn: "#7A4A00"
+  prompt: "#FF4719"
+  input_rule: "#DDD7D1"
+  response_border: "#FF4719"
+  status_bar_bg: "#E8E4DF"
+  status_bar_text: "#111111"
+  status_bar_strong: "#FF4719"
+  status_bar_dim: "#6B6560"
+  status_bar_good: "#1E6B3C"
+  status_bar_warn: "#7A4A00"
+  status_bar_bad: "#9A5E00"
+  status_bar_critical: "#C0000A"
+  session_label: "#FF4719"
+  session_border: "#6B6560"
+  voice_status_bg: "#E8E4DF"
+  selection_bg: "#DDD7D1"
+  completion_menu_bg: "#FFFFFF"
+  completion_menu_current_bg: "#E8E4DF"
+  completion_menu_meta_bg: "#F4F0EB"
+  completion_menu_meta_current_bg: "#DDD7D1"
+
+spinner:
+  waiting_faces:
+    - "(dl)"
+    - "(· )"
+    - "( ·)"
+    - "(··)"
+  thinking_faces:
+    - "(dl)"
+    - "(//)"
+    - "(-- )"
+    - "( --)"
+  thinking_verbs:
+    - "reducing noise"
+    - "holding structure"
+    - "shaping the system"
+    - "tracing the edge"
+    - "keeping it minimal"
+    - "warming the monochrome"
+  wings:
+    - ["⟪#", "#⟫"]
+    - ["⟪·", "·⟫"]
+    - ["⟪/", "/⟫"]
+
+branding:
+  agent_name: "Hermes Agent"
+  welcome: "Welcome to Hermes Agent — Designless Light. Type your message or /help for commands."
+  goodbye: "Goodbye. ▌"
+  response_label: " ▌ Hermes "
+  prompt_symbol: "▌"
+  help_header: "▌ Available Commands"
+
+tool_prefix: "│"
+
+tool_emojis:
+  terminal: "▣"
+  read_file: "▤"
+  write_file: "▥"
+  patch: "▨"
+  search_files: "⌕"
+  web_search: "◌"
+  browser_navigate: "◇"
+  computer_use: "▧"
+
+banner_logo: |
+  [bold #111111]██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗██╗     ███████╗███████╗███████╗[/]
+  [#111111]██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║██║     ██╔════╝██╔════╝██╔════╝[/]
+  [#FF4719]██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║██║     █████╗  ███████╗███████╗[/]
+  [#6B6560]██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║██║     ██╔══╝  ╚════██║╚════██║[/]
+  [#DDD7D1]██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║███████╗███████╗███████║███████║[/]
+  [#E8E4DF]╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚══════╝╚══════╝╚══════╝[/]
+
+banner_hero: |
+  [#DDD7D1]┌──────────────────────────────┐[/]
+  [#DDD7D1]│[/][#111111] warm monochrome            [/][#DDD7D1]│[/]
+  [#DDD7D1]│[/][#FF4719] molten focus               [/][#DDD7D1]│[/]
+  [#DDD7D1]│[/][#6B6560] structure over decoration  [/][#DDD7D1]│[/]
+  [#DDD7D1]└──────────────────────────────┘[/]
