@@ -10,7 +10,8 @@ Complete inventory of all Designless theme implementations and their status.
 | Terminal Emulators | 5 | 5 complete |
 | TUI Tools | 5 | 5 complete |
 | Apps | 1 | 1 complete |
-| **Total** | **14** | **14 complete** |
+| Hermes Agent CLI | 1 | 1 complete |
+| **Total** | **15** | **15 complete** |
 
 The Makefile installs terminal, TUI, and editor artifacts only (**24 files**, **12 tools**). **Slack** is documented and versioned under `slack/` but applied manually in the Slack desktop app (paste theme string).
 
@@ -31,6 +32,12 @@ The Makefile installs terminal, TUI, and editor artifacts only (**24 files**, **
 | Target | Files | Notes |
 |--------|-------|-------|
 | **Slack** | `designless-dark`, `designless-light` | Sidebar **Custom theme** (10 hex values per variant); see [slack/README.md](../slack/README.md); not deployed by `make install` |
+
+### Hermes Agent CLI
+
+| Target | Files | Notes |
+|--------|-------|-------|
+| **Hermes Agent** | `hermes/designless-light.yaml`, `hermes/designless-dark.yaml` | CLI skin YAML; copy to `~/.hermes/skins/`; activate via `/skin designless-dark` or `hermes config set display.skin designless-dark` |
 
 ### Terminal Emulators
 
