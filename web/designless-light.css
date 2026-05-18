@@ -1,0 +1,90 @@
+/* Designless Light — Web Dashboard Theme */
+:root,
+[data-theme="designless-light"] {
+  color-scheme: light;
+
+  /* Shared palette from colors/designless-light.json */
+  --dl-foreground: #111111;
+  --dl-background: #ffffff;
+  --dl-muted: #6b6560;
+  --dl-muted-lighter: #ddd7d1;
+  --dl-muted-lightest: #e8e4df;
+  --dl-accent: #ff4719;
+  --dl-error: #c0000a;
+  --dl-link: #1050a0;
+  --dl-link-hover: #1a6acc;
+  --dl-highlight: #ffb84d;
+  --dl-dark: #3a3530;
+
+  /* Semantic tokens */
+  --dl-comment: #6b6560;
+  --dl-string: #1e6b3c;
+  --dl-number: #7a4a00;
+  --dl-keyword: #5a2d9a;
+  --dl-type: #1050a0;
+  --dl-function: #006e6e;
+  --dl-variable: #111111;
+
+  /* Dashboard structure tokens */
+  --bg-page: var(--dl-background);
+  --bg-surface: #f7f4f0;
+  --bg-surface-strong: var(--dl-muted-lightest);
+  --bg-elevated: #fcfaf8;
+  --fg-primary: var(--dl-foreground);
+  --fg-secondary: var(--dl-dark);
+  --fg-muted: var(--dl-muted);
+  --border-subtle: var(--dl-muted-lightest);
+  --border-default: var(--dl-muted-lighter);
+  --border-strong: #c9c1b9;
+  --accent: var(--dl-accent);
+  --accent-contrast: #ffffff;
+  --focus-ring: color-mix(in srgb, var(--dl-accent) 55%, #ffffff 45%);
+  --status-error: var(--dl-error);
+  --status-info: var(--dl-link);
+  --status-success: var(--dl-string);
+  --selection: color-mix(in srgb, var(--dl-highlight) 30%, #ffffff 70%);
+  --code-bg: #f2eeea;
+  --shadow-soft: 0 1px 2px rgb(17 17 17 / 0.07);
+  --shadow-raised: 0 8px 20px rgb(17 17 17 / 0.12);
+}
+
+/* Optional baseline primitives for dashboard scaffolds */
+[data-theme="designless-light"] body {
+  background: var(--bg-page);
+  color: var(--fg-primary);
+}
+
+[data-theme="designless-light"] .panel,
+[data-theme="designless-light"] .card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  box-shadow: var(--shadow-soft);
+}
+
+[data-theme="designless-light"] .panel--raised,
+[data-theme="designless-light"] .menu,
+[data-theme="designless-light"] .modal {
+  background: var(--bg-elevated);
+  border-color: var(--border-subtle);
+  box-shadow: var(--shadow-raised);
+}
+
+[data-theme="designless-light"] a {
+  color: var(--status-info);
+}
+
+[data-theme="designless-light"] a:hover {
+  color: var(--dl-link-hover);
+}
+
+[data-theme="designless-light"] .btn--primary,
+[data-theme="designless-light"] .is-active,
+[data-theme="designless-light"] [aria-selected="true"] {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+[data-theme="designless-light"] :focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}

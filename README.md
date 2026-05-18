@@ -37,6 +37,7 @@ Designless is a warm-monochrome design system for building cohesive themes acros
 | Vim | ✅ Complete | [vim/](vim/) |
 | **Apps** | | |
 | Slack | ✅ Complete | [slack/](slack/) (manual paste; not deployed by `make install`) |
+| Web Dashboard | ✅ Complete | [web/](web/) |
 
 ## Terminal Screenshots
 

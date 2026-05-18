@@ -9,8 +9,8 @@ Complete inventory of all Designless theme implementations and their status.
 | VS Code & Editors | 3 | 3 complete |
 | Terminal Emulators | 5 | 5 complete |
 | TUI Tools | 5 | 5 complete |
-| Apps | 1 | 1 complete |
-| **Total** | **14** | **14 complete** |
+| Apps | 2 | 2 complete |
+| **Total** | **15** | **15 complete** |
 
 The Makefile installs terminal, TUI, and editor artifacts only (**24 files**, **12 tools**). **Slack** is documented and versioned under `slack/` but applied manually in the Slack desktop app (paste theme string).
 
@@ -31,6 +31,7 @@ The Makefile installs terminal, TUI, and editor artifacts only (**24 files**, **
 | Target | Files | Notes |
 |--------|-------|-------|
 | **Slack** | `designless-dark`, `designless-light` | Sidebar **Custom theme** (10 hex values per variant); see [slack/README.md](../slack/README.md); not deployed by `make install` |
+| **Web Dashboard** | `designless-light.css`, `designless-dark.css` | Plain CSS custom-property tokens for dashboard UI; see [web/README.md](../web/README.md) |
 
 ### Terminal Emulators
 
